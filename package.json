@@ -1,0 +1,19 @@
+{
+  "name": "data-provider-2-orion",
+  "version": "1.0.0",
+  "description": "Pulling data from various data providers, transforming the data and pushing to orion",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "ava"
+  },
+  "author": "Daniel Puschmann <daniel.puschmann@digicatapult.org.uk>",
+  "license": "MIT ",
+  "dependencies": {
+    "got": "^9.6.0"
+  },
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "nock": "^10.0.6"
+  }
+}
