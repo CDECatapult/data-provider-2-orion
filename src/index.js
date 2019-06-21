@@ -1,3 +1,3 @@
-const main = require("./server")
+const main = require("./server");
 
 main();
