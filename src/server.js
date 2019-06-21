@@ -1,4 +1,5 @@
 const got = require("got");
+const transform = require("./transform");
 
 const bt = got.extend({
   baseUrl: "http://api.rp.bt.com/sensors/feeds",
@@ -9,7 +10,8 @@ const bt = got.extend({
 });
 
 function publishToBroker(body) {
-  console.log(body);
+  //console.log(body);
+  return body;
   //got.post("http://34.244.86.232:1026/v2/op/update?options=keyValues", {body})
 }
 
@@ -21,24 +23,34 @@ async function getDataFromProvider(feedID, dataProvider) {
   }
 }
 
-function transformData(data) {
-  return data;
+async function asyncForEach(array, callback) {
+  for (let i = 0; i < array.length; i++) {
+    await callback(array[index], index, array);
+  }
 }
 
-function main() {
+async function getAndPublishAll() {
+  const start = async () => {
+    await asyncForEach(dataSources, async feedID => {
+      await waitFor(50);
+      console.log("Got data for " + feedID);
+    });
+    console.log("Got data from all feeds");
+  };
+  start();
+}
+
+async function getAndPublishOne(feedID) {
   //In milliseconds
   console.log("Starting");
-  let timer = 500;
-  let feedID = dataSources[0];
-  return setInterval(async () => {
-    try {
-      const data = await getDataFromProvider(feedID, bt);
-      const transformedData = transformData(data);
-      publishToBroker(transformedData);
-    } catch (err) {
-      console.error(err);
-    }
-  }, timer);
+  let test = 2;
+  try {
+    const data = await getDataFromProvider(feedID, bt);
+    const transformedData = transform(data);
+    return publishToBroker(transformedData);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 let dataSources = [
@@ -114,4 +126,4 @@ let dataSources = [
   "5b2123b5-6a01-4a37-bc05-3e93ce14eb92"
 ];
 
-module.exports = main;
+module.exports = getAndPublishOne;
