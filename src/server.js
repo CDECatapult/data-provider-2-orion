@@ -14,20 +14,10 @@ async function getDataFromProvider(feedID, dataProvider) {
   }
 }
 
-async function asyncForEach(array, callback) {
-  for (let i = 0; i < array.length; i++) {
-    await callback(array[i], i, array);
-  }
-}
-
 async function getAndPublishAll(dataProvider, dataSources) {
-  const start = async () => {
-    await asyncForEach(dataSources, async feedID => {
-      var resp = await getAndPublishOne(feedID, dataProvider);
-      console.log("Got data for " + feedID);
-    });
-  };
-  start();
+  for (let dataSource of dataSources) {
+    let resp = await getAndPublishOne(dataSource, dataProvider);
+  }
   return "Got data from all feeds";
 }
 
