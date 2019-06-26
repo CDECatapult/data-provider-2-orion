@@ -10,7 +10,10 @@
   "author": "Daniel Puschmann <daniel.puschmann@digicatapult.org.uk>",
   "license": "MIT ",
   "dependencies": {
-    "got": "^9.6.0"
+    "envalid": "^5.0.0",
+    "got": "^9.6.0",
+    "line-reader": "^0.4.0",
+    "mock-require": "^3.0.3"
   },
   "devDependencies": {
     "ava": "^2.1.0",
