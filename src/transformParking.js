@@ -1,6 +1,6 @@
 function transform(data) {
   console.log("IN TRANSFORM");
-  console.log(data);
+  //console.log(data);
   var idString = data.locname.toString().replace(/[\\"'()]/g, "");
   var idArray = idString.split(" ");
   var id = idArray[0];

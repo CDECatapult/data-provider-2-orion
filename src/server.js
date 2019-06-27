@@ -1,9 +1,15 @@
 const got = require("got");
-const transform = require("./transform");
+const transform = require("./transformParking");
 
-function publishToBroker(body) {
-  //console.log(body);
-  return body;
+async function publishToBroker(data, dataBroker) {
+  json_data = { actionType: "APPEND", entities: [data] };
+  try {
+    return (await dataBroker.post("/v2/op/update?options=keyValues", json_data))
+      .body;
+  } catch (err) {
+    console.log(dataBroker.url);
+    console.log(err);
+  }
 }
 
 async function getDataFromProvider(feedID, dataProvider) {
@@ -14,26 +20,25 @@ async function getDataFromProvider(feedID, dataProvider) {
   }
 }
 
-async function getAndPublishAll(dataProvider, dataSources) {
+async function getAndPublishAll(dataProvider, dataBroker, dataSources) {
   for (let dataSource of dataSources) {
-    let resp = await getAndPublishOne(dataSource, dataProvider);
+    let resp = await getAndPublishOne(dataSource, dataBroker, dataProvider);
   }
   return "Got data from all feeds";
 }
 
-async function getAndPublishOne(feedID, dataProvider) {
+async function getAndPublishOne(feedID, dataBroker, dataProvider) {
   //In milliseconds
-  //console.log("Getting data for " + feedID);
   try {
     const data = await getDataFromProvider(feedID, dataProvider);
     const transformedData = transform(data);
-    return publishToBroker(transformedData);
+    return publishToBroker(transformedData, dataBroker);
   } catch (err) {
     console.error(err);
   }
 }
 
 module.exports = {
-  getAndPublishAll: getAndPublishAll,
-  getAndPublishOne: getAndPublishOne
+  getAndPublishAll,
+  getAndPublishOne
 };
