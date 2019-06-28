@@ -14,7 +14,10 @@ const orion_url = env.ORION_URL;
 
 const orion = got.extend({
   baseUrl: orion_url,
-  json: true
+  json: true,
+  headers: {
+    "Fiware-Service": "manchester"
+  }
 });
 
 const bt = got.extend({

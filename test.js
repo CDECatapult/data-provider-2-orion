@@ -18,7 +18,10 @@ test.serial(
       .get("/sensors/feeds/fakeID")
       .reply(200, input);
     let orionMock = nock("http://34.244.86.232:1026")
-      .post("/v2/op/update?options=keyValues")
+      .post("/v2/op/update?options=keyValues", body => {
+        t.deepEqual(body, output);
+        return true;
+      })
       .reply(201, {});
 
     const env = cleanEnv(process.env, {
@@ -41,25 +44,31 @@ test.serial(
         "x-api-key": api_key
       }
     });
-    let resp = await getAndPublishOne("fakeID", orion, bt);
+    let resp,
+      transformed = await getAndPublishOne("fakeID", orion, bt);
+    console.log(resp);
     t.is(btMock.isDone(), true);
-    //t.deepEqual(resp, output);
+    t.is(orionMock.isDone(), true);
+    t.deepEqual(transformed, output);
   }
 );
 
 test.serial("Get all data points for Parking data from BT", async t => {
   let btMock = nock("https://api.rp.bt.com");
-  ["feed1", "feed2"].forEach(feedID => {
+  let feedIDs = ["feed1", "feed2"];
+  feedIDs.forEach(feedID => {
     btMock = btMock.get(`/sensors/feeds/${feedID}`).reply(200, input);
   });
   let orionMock = nock("http://34.244.86.232:1026")
     .post("/v2/op/update?options=keyValues")
+    .times(feedIDs.length)
     .reply(201, {});
 
   const env = cleanEnv(process.env, { PROVIDER_API_KEY: str(), BT_URL: str() });
   const api_key = env.PROVIDER_API_KEY;
   const bt_url = env.BT_URL;
   const orion_url = env.ORION_URL;
+  console.log(`TEST ALL: ${orion_url}`);
 
   const orion = got.extend({
     baseUrl: orion_url,
@@ -76,6 +85,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
 
   var resp = await getAndPublishAll(bt, orion, ["feed1", "feed2"]);
   t.is(btMock.isDone(), true);
+  t.is(orionMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
 });
 

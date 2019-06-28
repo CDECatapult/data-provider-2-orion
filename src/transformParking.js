@@ -1,11 +1,11 @@
 function transform(data) {
-  console.log("IN TRANSFORM");
+  console.log("IN TRANSFORM PARKING");
   //console.log(data);
   var idString = data.locname.toString().replace(/[\\"'()]/g, "");
   var idArray = idString.split(" ");
   var id = idArray[0];
 
-  transformed = {
+  let transformed = {
     id: "urn:ngsiv2:OnStreetParking:manchester:" + id,
     type: "OnStreetParking",
     address: {
@@ -53,7 +53,7 @@ function transform(data) {
       type: "Number",
       metadata: {
         timestamp: {
-          value: new Date(data.streams[0].current_time),
+          value: new Date(data.streams[0].current_time).toISOString(),
           type: "DateTime"
         }
       }
@@ -64,7 +64,7 @@ function transform(data) {
       metadata: {
         timestamp: {
           type: "DateTime",
-          value: new Date(data.streams[1].current_time)
+          value: new Date(data.streams[1].current_time).toISOString()
         }
       }
     }

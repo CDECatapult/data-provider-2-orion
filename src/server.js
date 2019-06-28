@@ -4,11 +4,12 @@ const transform = require("./transformParking");
 async function publishToBroker(data, dataBroker) {
   json_data = { actionType: "APPEND", entities: [data] };
   try {
-    return (await dataBroker.post("/v2/op/update?options=keyValues", json_data))
-      .body;
+    resp = (await dataBroker.post("/v2/op/update?options=keyValues", {
+      body: json_data
+    })).body;
+    return resp, json_data;
   } catch (err) {
-    console.log(dataBroker.url);
-    console.log(err);
+    console.log(`ERROR IN publishToBroker${err}`);
   }
 }
 
