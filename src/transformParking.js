@@ -24,7 +24,7 @@ function getType(location) {
 function transform(data) {
   var idString = data.locname.toString().replace(/[\\"'()]/g, "");
   var idArray = idString.split(" ");
-  var id = idArray[0];
+  var id = idArray.join("");
   var streetAddress = data.locname.toString().replace(/[\\"'()]/g, "");
   var type = getType(streetAddress);
 
