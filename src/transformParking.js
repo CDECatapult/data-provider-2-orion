@@ -1,18 +1,41 @@
+function getType(location) {
+  var offStreet = [
+    "ASDA",
+    "Sainburys",
+    "Sainsbury",
+    "Marks & Spencer",
+    "Tesco",
+    "Car Park",
+    "Grand Arcade",
+    "Matalan",
+    "Centre",
+    "Arndale",
+    "GMEX",
+    "Arena"
+  ];
+  for (let os of offStreet) {
+    if (location.indexOf(os) > 0) {
+      return "OffStreetParking";
+    }
+  }
+  return "OnStreetParking";
+}
+
 function transform(data) {
-  console.log("IN TRANSFORM PARKING");
-  //console.log(data);
   var idString = data.locname.toString().replace(/[\\"'()]/g, "");
   var idArray = idString.split(" ");
   var id = idArray[0];
+  var streetAddress = data.locname.toString().replace(/[\\"'()]/g, "");
+  var type = getType(streetAddress);
 
   let transformed = {
-    id: "urn:ngsiv2:OnStreetParking:manchester:" + id,
-    type: "OnStreetParking",
+    id: `urn:ngsiv2:${type}:manchester:${id}`,
+    type: type,
     address: {
       value: {
         addressCountry: "UK",
         addressLocality: "Manchester",
-        streetAddress: data.locname.toString().replace(/[\\"'()]/g, "")
+        streetAddress: streetAddress
       },
       type: "object"
     },
@@ -39,7 +62,10 @@ function transform(data) {
       value: ["noPermitNeeded"],
       type: "Text"
     },
-    permitActiveHours: null,
+    permitActiveHours: {
+      value: ["noPermitNeeded"],
+      type: "None"
+    },
     chargeType: {
       value: ["free"],
       type: "Text"

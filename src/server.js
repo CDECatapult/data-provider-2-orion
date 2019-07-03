@@ -9,7 +9,7 @@ async function publishToBroker(data, dataBroker) {
     })).body;
     return resp, json_data;
   } catch (err) {
-    console.log(`ERROR IN publishToBroker${err}`);
+    console.log(`ERROR IN publishToBroker ${err}`);
   }
 }
 

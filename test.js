@@ -6,7 +6,7 @@ const { cleanEnv, str } = require("envalid");
 mock("parking.json", ["feed1", "feed2", "feed3"]);
 const { getAndPublishOne, getAndPublishAll } = require("./src/server");
 const input = require("./data/testInputParking.json");
-const output = require("./data/testOutputParking");
+const output = require("./data/testOutputParkingKeyValue.json");
 
 test.afterEach.always(() => nock.cleanAll());
 //nock.disableNetConnect();

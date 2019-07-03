@@ -1,37 +1,110 @@
 {
-  "id": "b669e529-f894-49ee-b73a-9877cbd87067",
-  "creator": "dukeak",
-  "updated": "Wed, 01 May 2019 16:16:38 GMT",
-  "title": "Manchester Parking Data - Stockport Exchange (Surface)",
-  "url": "/feeds/b669e529-f894-49ee-b73a-9877cbd87067",
+  "id": "eafdcd6a-1b41-4677-9755-5ed4ffac8b1f",
+  "creator": "dhadmin",
+  "updated": "Thu, 02 May 2019 11:41:22 GMT",
+  "title": "Manchester AQ Clarity Monitor - Type Node-S: ATTY95MM",
+  "url": "/feeds/eafdcd6a-1b41-4677-9755-5ed4ffac8b1f",
   "private": "false",
-  "description": "Manchester Parking Data for the CityVerve project. Details for parking location: Stockport Exchange (Surface). Contains Transport for Greater Manchester data. Contains OS data ? Crown copyright and database right 2016.",
-  "tags": ["CityVerve", "Manchester", "car", "vehicle"],
-  "locname": "Stockport Exchange (Surface)",
-  "lon": -2.161386,
-  "lat": 53.40526,
+  "description": "Manchester Clarity Monitor - Type Node-S: ATTY95MM",
+  "tags": ["AQ", "\"air quality\"", "cityverve"],
+  "locname": "Manchester Oxford Road",
+  "lon": -2.23892569999999979657,
+  "lat": 5.34720149999999989632e1,
   "ele": 0.0,
+  "website": "http://www.cityverve.org.uk/",
   "streams": [
     {
-      "id": 0,
-      "tags": ["\"parking bays\""],
-      "current_time": "Fri, 14 Jun 2019 16:15:11 GMT",
-      "current_value": "927",
-      "unit_text": "Number of free bays"
+      "id": 12,
+      "tags": ["period"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "s",
+      "unit_type": "basicSI",
+      "unit_text": "seconds"
     },
     {
-      "id": 1,
-      "tags": ["\"parking bays\""],
-      "current_time": "Fri, 14 Jun 2019 16:15:11 GMT",
-      "current_value": "1000",
-      "unit_text": "Total number of bays"
+      "id": 11,
+      "tags": ["quality"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT"
+    },
+    {
+      "id": 10,
+      "tags": ["PM25"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "microgrammes per cubic metre"
+    },
+    {
+      "id": 9,
+      "tags": ["PM1"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "microgrammes per cubic metre"
+    },
+    {
+      "id": 8,
+      "tags": ["PM10"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "microgrammes per cubic metre"
+    },
+    {
+      "id": 7,
+      "tags": ["SO2"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "microgrammes per cubic metre"
+    },
+    {
+      "id": 6,
+      "tags": ["PAH"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
+    },
+    {
+      "id": 5,
+      "tags": ["O3"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
+    },
+    {
+      "id": 4,
+      "tags": ["NOXasNO2"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
+    },
+    {
+      "id": 3,
+      "tags": ["NO2"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
     },
     {
       "id": 2,
-      "tags": ["parking"],
-      "current_time": "Fri, 14 Jun 2019 16:15:11 GMT",
-      "current_value": "Closed",
-      "unit_text": "Status"
+      "tags": ["NO"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
+    },
+    {
+      "id": 1,
+      "tags": ["CO"],
+      "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "unit_symbol": "ppb",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "parts per billion"
     }
   ]
 }

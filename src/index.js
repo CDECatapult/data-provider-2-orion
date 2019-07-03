@@ -1,7 +1,7 @@
-const getAndPublishAll = require("./server");
+const { getAndPublishOne, getAndPublishAll } = require("./server");
 const got = require("got");
 const { cleanEnv, str } = require("envalid");
-const parking = require("../data/parking.json");
+const parking = require("../data/parkingFeedIDs.json");
 
 const env = cleanEnv(process.env, {
   PROVIDER_API_KEY: str(),
@@ -30,4 +30,5 @@ const bt = got.extend({
 
 // 5 minutes in milliseconds
 let timer = 300000;
-setInterval(getAndPublishAll(bt, orion, parking), timer);
+//setInterval(getAndPublishAll(bt, orion, parking), timer);
+getAndPublishAll(bt, orion, parking);
