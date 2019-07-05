@@ -1,0 +1,46 @@
+{
+  "actionType": "APPEND",
+  "entities": [
+    {
+      "id": "urn:ngsiv2:BikeHireDockingStation:dublin:Smithfield",
+      "type": "BikeHireDockingStation",
+      "status": {
+        "value": "CLOSED"
+      },
+      "availableBikeNumber": {
+        "value": 0,
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-07-05T09:34:40.000Z"
+          }
+        }
+      },
+      "freeSlotNumber": {
+        "value": 0,
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-07-05T09:34:40.000Z"
+          }
+        }
+      },
+      "totalSlotNumber": {
+        "value": 30,
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-07-05T09:34:40.000Z"
+          }
+        }
+      },
+      "location": {
+        "type": "geo:json",
+        "value": {
+          "type": "Point",
+          "coordinates": [-6.27821400000000018338, 5.33476900000000000546e1]
+        }
+      }
+    }
+  ]
+}

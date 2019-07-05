@@ -2,64 +2,143 @@
   "actionType": "APPEND",
   "entities": [
     {
-      "id": "urn:ngsiv2:OnStreetParking:manchester:Stockport",
-      "type": "OnStreetParking",
+      "id": "urn:ngsiv2:AirQualityObserved:manchester:ATTY95MM",
+      "type": "AirQualityObserved",
       "address": {
         "value": {
           "addressCountry": "UK",
           "addressLocality": "Manchester",
-          "streetAddress": "Stockport Exchange Surface"
+          "streetAddress": "Manchester Oxford Road"
         },
         "type": "object"
       },
       "location": {
-        "value": { "coordinates": [-2.161386, 53.40526], "type": "Point" },
+        "value": { "coordinates": [-2.238925, 5.347201], "type": "Point" },
         "type": "geo:json"
       },
-      "allowedVehicleType": {
-        "value": ["car"],
-        "type": "Text"
-      },
-      "availableSpotNumber": {
-        "value": 927,
-        "type": "Number",
+      "PM25": {
+        "value": 10,
         "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
           "timestamp": {
-            "value": "2019-06-14T16:15:11.000Z",
+            "value": "2019-05-02T11:41:22.000Z",
             "type": "DateTime"
           }
         }
       },
-      "category": {
-        "value": ["public"],
-        "type": "Text"
-      },
-      "chargeType": {
-        "value": ["free"],
-        "type": "Text"
-      },
-      "name": {
-        "value": "Manchester Parking Data - Stockport Exchange Surface",
-        "type": "Text"
-      },
-      "occupancyDetectionType": {
-        "value": ["none"],
-        "type": "Text"
-      },
-      "permitActiveHours": null,
-      "requiredPermit": {
-        "value": ["noPermitNeeded"],
-        "type": "Text"
-      },
-      "totalSpotNumber": {
-        "value": 1000,
-        "type": "Number",
+      "PM1": {
+        "value": 11,
         "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
           "timestamp": {
-            "type": "DateTime",
-            "value": "2019-06-14T16:15:11.000Z"
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
           }
         }
+      },
+      "PM10": {
+        "value": 12,
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "SO2": {
+        "value": 13,
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "PAH": {
+        "value": 14,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "O3": {
+        "value": 15,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NOXasNO2": {
+        "value": 16,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO2": {
+        "value": 17,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO": {
+        "value": 18,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "CO": {
+        "value": 19,
+        "metadata": {
+          "unitCode": {
+            "value": "61"
+          },
+          "timestamp": {
+            "value": "2019-05-02T11:41:22.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "name": {
+        "value": "Manchester AQ Clarity Monitor - Type Node-S: ATTY95MM",
+        "type": "Text"
       }
     }
   ]

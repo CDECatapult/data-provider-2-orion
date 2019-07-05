@@ -8,8 +8,8 @@
   "description": "Manchester Clarity Monitor - Type Node-S: ATTY95MM",
   "tags": ["AQ", "\"air quality\"", "cityverve"],
   "locname": "Manchester Oxford Road",
-  "lon": -2.23892569999999979657,
-  "lat": 5.34720149999999989632e1,
+  "lon": -2.238925,
+  "lat": 5.347201,
   "ele": 0.0,
   "website": "http://www.cityverve.org.uk/",
   "streams": [
@@ -30,6 +30,7 @@
       "id": 10,
       "tags": ["PM25"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 10,
       "unit_symbol": "μg/m3",
       "unit_type": "contextDependentUnits",
       "unit_text": "microgrammes per cubic metre"
@@ -38,6 +39,7 @@
       "id": 9,
       "tags": ["PM1"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 11,
       "unit_symbol": "μg/m3",
       "unit_type": "contextDependentUnits",
       "unit_text": "microgrammes per cubic metre"
@@ -46,6 +48,7 @@
       "id": 8,
       "tags": ["PM10"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 12,
       "unit_symbol": "μg/m3",
       "unit_type": "contextDependentUnits",
       "unit_text": "microgrammes per cubic metre"
@@ -54,6 +57,7 @@
       "id": 7,
       "tags": ["SO2"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 13,
       "unit_symbol": "μg/m3",
       "unit_type": "contextDependentUnits",
       "unit_text": "microgrammes per cubic metre"
@@ -62,6 +66,7 @@
       "id": 6,
       "tags": ["PAH"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 14,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"
@@ -70,6 +75,7 @@
       "id": 5,
       "tags": ["O3"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 15,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"
@@ -78,6 +84,7 @@
       "id": 4,
       "tags": ["NOXasNO2"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 16,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"
@@ -86,6 +93,7 @@
       "id": 3,
       "tags": ["NO2"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 17,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"
@@ -94,6 +102,7 @@
       "id": 2,
       "tags": ["NO"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 18,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"
@@ -102,6 +111,7 @@
       "id": 1,
       "tags": ["CO"],
       "current_time": "Thu, 02 May 2019 11:41:22 GMT",
+      "current_value": 19,
       "unit_symbol": "ppb",
       "unit_type": "contextDependentUnits",
       "unit_text": "parts per billion"

@@ -1,0 +1,63 @@
+{
+  "id": "456179df-8e4b-4354-ab71-1457002adee2",
+  "creator": "dhadmin",
+  "updated": "Tue, 07 May 2019 10:51:56 GMT",
+  "title": "Dublinbikes Cycle Share Scheme Station SMITHFIELD (35)",
+  "url": "/feeds/456179df-8e4b-4354-ab71-1457002adee2",
+  "private": "false",
+  "description": "Information about dublinbikes Cycle Share Scheme Station provided by JCDecaux.",
+  "tags": ["cycling", "\"cycle share\"", "dublin"],
+  "locname": "Smithfield",
+  "lon": -6.27821400000000018338,
+  "lat": 5.33476900000000000546e1,
+  "ele": 0.0,
+  "website": "https://developer.jcdecaux.com",
+  "streams": [
+    {
+      "id": 7,
+      "tags": ["last_update"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "1562315680000",
+      "unit_text": "miliseconds"
+    },
+    {
+      "id": 6,
+      "tags": ["status"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "CLOSED"
+    },
+    {
+      "id": 5,
+      "tags": ["available_bikes"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "0",
+      "unit_text": "available bikes"
+    },
+    {
+      "id": 4,
+      "tags": ["available_bike_stands"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "0",
+      "unit_text": "available bike stands"
+    },
+    {
+      "id": 3,
+      "tags": ["bike_stands"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "30",
+      "unit_text": "bike stands"
+    },
+    {
+      "id": 2,
+      "tags": ["bonus"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "false"
+    },
+    {
+      "id": 1,
+      "tags": ["banking"],
+      "current_time": "Fri, 05 Jul 2019 09:34:40 GMT",
+      "current_value": "false"
+    }
+  ]
+}
