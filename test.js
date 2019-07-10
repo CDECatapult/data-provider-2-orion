@@ -95,13 +95,12 @@ test.serial("Get all data points for Parking data from BT", async t => {
       "x-api-key": api_key
     }
   });
+  var dataFeedsTransformMap = [];
 
-  var resp = await getAndPublishAll(
-    bt,
-    orion,
-    ["feed1", "feed2"],
-    transformParking
-  );
+  for (let feedID of feedIDs) {
+    dataFeedsTransformMap.push({ id: feedID, transform: transformParking });
+  }
+  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
@@ -183,13 +182,15 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       "x-api-key": api_key
     }
   });
+  var dataFeedsTransformMap = [];
 
-  var resp = await getAndPublishAll(
-    bt,
-    orion,
-    ["feed1", "feed2"],
-    transformBicycleShare
-  );
+  for (let feedID of feedIDs) {
+    dataFeedsTransformMap.push({
+      id: feedID,
+      transform: transformBicycleShare
+    });
+  }
+  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
@@ -275,12 +276,12 @@ test.serial("Get all data points for Air Quality data from BT", async t => {
     }
   });
 
-  var resp = await getAndPublishAll(
-    bt,
-    orion,
-    ["feed1", "feed2"],
-    transformAirQuality
-  );
+  var dataFeedsTransformMap = [];
+
+  for (let feedID of feedIDs) {
+    dataFeedsTransformMap.push({ id: feedID, transform: transformAirQuality });
+  }
+  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");

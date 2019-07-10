@@ -33,14 +33,20 @@ const bt = got.extend({
   }
 });
 
+// This is grouping each feed id with the corresponding transform function
+var dataFeedsTransformMap = [];
+
+for (let parkingID of parkingIDs) {
+  dataFeedsTransformMap.push({ id: parkingID, transform: transformParking });
+}
+
+for (let bicycleID of bicycleIDs) {
+  dataFeedsTransformMap.push({
+    id: bicycleID,
+    transform: transformBicycleShare
+  });
+}
+
 // 5 minutes in milliseconds
 let timer = 300000;
-setInterval(getAndPublishAll(bt, orion, parkingIDs, transformParking), timer);
-setInterval(
-  getAndPublishAll(bt, orion, bicycleIDs, transformBicycleShare),
-  timer
-);
-setInterval(
-  getAndPublishAll(bt, orion, airQualityIDs, transformAirQuality),
-  timer
-);
+setInterval(getAndPublishAll(bt, orion, dataFeedsTransformMap), timer);

@@ -23,12 +23,13 @@ async function getDataFromProvider(feedID, dataProvider) {
 async function getAndPublishAll(
   dataProvider,
   dataBroker,
-  dataSources,
-  transform
+  dataFeedTransformMap
 ) {
-  for (let dataSource of dataSources) {
+  for (let dataSource of dataFeedTransformMap) {
+    dataFeedID = dataSource.id;
+    transform = dataSource.transform;
     let resp = await getAndPublishOne(
-      dataSource,
+      dataFeedID,
       dataBroker,
       dataProvider,
       transform
