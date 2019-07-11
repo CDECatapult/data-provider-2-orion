@@ -17,10 +17,7 @@ const orion_url = env.ORION_URL;
 
 const orion = got.extend({
   baseUrl: orion_url,
-  json: true,
-  headers: {
-    "Fiware-Service": "manchester"
-  }
+  json: true
 });
 
 const bt = got.extend({
@@ -35,13 +32,18 @@ const bt = got.extend({
 var dataFeedsTransformMap = [];
 
 for (let parkingID of parkingIDs) {
-  dataFeedsTransformMap.push({ id: parkingID, transform: transformParking });
+  dataFeedsTransformMap.push({
+    id: parkingID,
+    transform: transformParking,
+    fiwareService: "manchester"
+  });
 }
 
 for (let bicycleID of bicycleIDs) {
   dataFeedsTransformMap.push({
     id: bicycleID,
-    transform: transformBicycleShare
+    transform: transformBicycleShare,
+    fiwareService: "dublin"
   });
 }
 
@@ -52,6 +54,6 @@ exports.handler = async event => {
     statusCode: 200,
     body: status
   };
-  
+
   return response;
 };
