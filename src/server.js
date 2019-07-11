@@ -49,7 +49,4 @@ async function getAndPublishOne(feedID, dataBroker, dataProvider, transform) {
   }
 }
 
-module.exports = {
-  getAndPublishAll,
-  getAndPublishOne
-};
+module.exports = getAndPublishAll;

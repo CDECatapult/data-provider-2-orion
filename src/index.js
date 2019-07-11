@@ -1,12 +1,10 @@
-const { getAndPublishOne, getAndPublishAll } = require("./server");
+const getAndPublishAll = require("./server");
 const got = require("got");
 const { cleanEnv, str } = require("envalid");
 const parkingIDs = require("../data/parkingFeedIDs.json");
 const bicycleIDs = require("../data/bicycleShareFeedIDs.json");
-const airQualityIDs = require("../data/airQualityFeedIDs.json");
 const transformParking = require("./transformParking");
 const transformBicycleShare = require("./transformBicycleShare");
-const transformAirQuality = require("./transformAirQuality");
 
 const env = cleanEnv(process.env, {
   PROVIDER_API_KEY: str(),
