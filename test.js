@@ -9,12 +9,12 @@ const transformParking = require("./src/transformParking");
 const transformBicycleShare = require("./src/transformBicycleShare");
 const transformAirQuality = require("./src/transformAirQuality");
 const getAndPublishAll = require("./src/server");
-const parkingInput = require("./data/testInputParking.json");
-const parkingOutput = require("./data/testOutputParkingKeyValue.json");
-const bicycleInput = require("./data/testInputBicycleShare.json");
-const bicycleOutput = require("./data/testOutputBicycleShare.json");
-const airQualityInput = require("./data/testInputAirQuality.json");
-const airQualityOutput = require("./data/testOutputAirQuality.json");
+const parkingInput = require("./data/test/testInputParking.json");
+const parkingOutput = require("./data/test/testOutputParkingKeyValue.json");
+const bicycleInput = require("./data/test/testInputBicycleShare.json");
+const bicycleOutput = require("./data/test/testOutputBicycleShare.json");
+const airQualityInput = require("./data/test/testInputAirQuality.json");
+const airQualityOutput = require("./data/test/testOutputAirQuality.json");
 
 test.afterEach.always(() => nock.cleanAll());
 nock.disableNetConnect();
