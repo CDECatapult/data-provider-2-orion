@@ -2,8 +2,10 @@ const test = require("ava");
 const nock = require("nock");
 const mock = require("mock-require");
 const got = require("got");
-const { cleanEnv, str } = require("envalid");
 mock("parking.json", ["feed1", "feed2", "feed3"]);
+const api_key = "testkey";
+const bt_url = "http://bt";
+const orion_url = "http://orion";
 
 const transformParking = require("./src/transformParking");
 const transformBicycleShare = require("./src/transformBicycleShare");
@@ -20,18 +22,10 @@ test.afterEach.always(() => nock.cleanAll());
 nock.disableNetConnect();
 
 test.serial("Get all data points for Parking data from BT", async t => {
-  const env = cleanEnv(process.env, {
-    PROVIDER_API_KEY: str(),
-    BT_URL: str(),
-    ORION_URL: str()
-  });
-  const api_key = env.PROVIDER_API_KEY;
-  const bt_url = env.BT_URL;
-  const orion_url = env.ORION_URL;
-  let btMock = nock("https://api.rp.bt.com");
+  let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
-    btMock = btMock.get(`/sensors/feeds/${feedID}`).reply(200, parkingInput);
+    btMock = btMock.get(`/${feedID}`).reply(200, parkingInput);
   });
   let orionMock = nock(orion_url)
     .post("/v2/op/update?options=keyValues", body => {
@@ -67,18 +61,10 @@ test.serial("Get all data points for Parking data from BT", async t => {
 });
 
 test.serial("Get all data points for Bicycle Share data from BT", async t => {
-  const env = cleanEnv(process.env, {
-    PROVIDER_API_KEY: str(),
-    BT_URL: str(),
-    ORION_URL: str()
-  });
-  const api_key = env.PROVIDER_API_KEY;
-  const bt_url = env.BT_URL;
-  const orion_url = env.ORION_URL;
-  let btMock = nock("https://api.rp.bt.com");
+  let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
-    btMock = btMock.get(`/sensors/feeds/${feedID}`).reply(200, bicycleInput);
+    btMock = btMock.get(`/${feedID}`).reply(200, bicycleInput);
   });
   let orionMock = nock(orion_url)
     .post("/v2/op/update?options=keyValues", body => {
@@ -117,18 +103,10 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
 });
 
 test.serial("Get all data points for Air Quality data from BT", async t => {
-  const env = cleanEnv(process.env, {
-    PROVIDER_API_KEY: str(),
-    BT_URL: str(),
-    ORION_URL: str()
-  });
-  const api_key = env.PROVIDER_API_KEY;
-  const bt_url = env.BT_URL;
-  const orion_url = env.ORION_URL;
-  let btMock = nock("https://api.rp.bt.com");
+  let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
-    btMock = btMock.get(`/sensors/feeds/${feedID}`).reply(200, airQualityInput);
+    btMock = btMock.get(`/${feedID}`).reply(200, airQualityInput);
   });
   let orionMock = nock(orion_url)
     .post("/v2/op/update?options=keyValues", body => {
