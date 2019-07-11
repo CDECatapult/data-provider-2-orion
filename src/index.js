@@ -45,6 +45,13 @@ for (let bicycleID of bicycleIDs) {
   });
 }
 
-// 5 minutes in milliseconds
-let timer = 300000;
-setInterval(getAndPublishAll(bt, orion, dataFeedsTransformMap), timer);
+exports.handler = async event => {
+  const status = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
+
+  const response = {
+    statusCode: 200,
+    body: status
+  };
+  
+  return response;
+};
