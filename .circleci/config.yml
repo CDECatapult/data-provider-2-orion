@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:10.16.0
     steps:
@@ -9,9 +9,9 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           keys:
-            - v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-node-{{ arch }}-{{ .Branch }}-
-            - v1-node-{{ arch }}-
+            - v1-node-dev-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-node-dev-{{ arch }}-{{ .Branch }}-
+            - v1-node-dev-{{ arch }}-
 
       - run:
           name: Install dependencies
@@ -23,12 +23,53 @@ jobs:
 
       - save_cache:
           name: Save node_modules cache
-          key: v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: v1-node-dev-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
+
+  build:
+    docker:
+      - image: circleci/node:10.16.0
+    steps:
+      - checkout
+
+      - run:
+          name: Install awscli, jq and zip
+          command: |
+            sudo apt update
+            sudo apt install -y jq zip python3-pip
+            pip3 install awscli --upgrade
+
+      - restore_cache:
+          name: Restore node_modules cache
+          keys:
+            - v1-node-prod-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-node-prod-{{ arch }}-{{ .Branch }}-
+            - v1-node-prod-{{ arch }}-
+
+      - run:
+          name: Install production dependencies only
+          command: npm i --only=prod
+
+      - save_cache:
+          name: Save node_modules cache
+          key: v1-node-prod-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Zip the sources of the lambda
+          command: |
+            zip -r bt-to-orion.zip data src node_modules package.json index.js
+
+      - store_artifacts:
+          path: bt-to-orion.zip
 
 workflows:
   version: 2
   logic-proxy:
     jobs:
-      - build
+      - test
+      - build:
+          requires:
+            - test
