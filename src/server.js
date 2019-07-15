@@ -1,12 +1,13 @@
-const got = require("got");
+const FormData = require("form-data");
 
 async function getAuthToken(idm, user, password) {
+  const form = new FormData();
+  form.append("grant_type", "password");
+  form.append("user", user);
+  form.append("password", password);
+
   let resp = await idm.post("/oauth2/token", {
-    body: {
-      grant_type: "password",
-      user,
-      password
-    }
+    body: form
   });
   return resp.body.access_token;
 }
