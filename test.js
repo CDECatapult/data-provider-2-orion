@@ -33,6 +33,19 @@ const idm = got.extend({
   }
 });
 
+const orion = got.extend({
+  baseUrl: orion_url,
+  json: true
+});
+
+const bt = got.extend({
+  baseUrl: bt_url,
+  json: true,
+  headers: {
+    "x-api-key": api_key
+  }
+});
+
 test.serial("Get all data points for Parking data from BT", async t => {
   let idmMock = nock(idm_url)
     .post("/oauth2/token", "grant_type=password&user=a%40b.com&password=1234")
@@ -56,20 +69,6 @@ test.serial("Get all data points for Parking data from BT", async t => {
     .times(feedIDs.length)
     .reply(201, {});
 
-  console.log(`TEST ALL: ${orion_url}`);
-
-  const orion = got.extend({
-    baseUrl: orion_url,
-    json: true
-  });
-
-  const bt = got.extend({
-    baseUrl: bt_url,
-    json: true,
-    headers: {
-      "x-api-key": api_key
-    }
-  });
   var dataFeedsTransformMap = [];
 
   for (let feedID of feedIDs) {
@@ -112,20 +111,6 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
     .times(feedIDs.length)
     .reply(201, {});
 
-  console.log(`TEST ALL: ${orion_url}`);
-
-  const orion = got.extend({
-    baseUrl: orion_url,
-    json: true
-  });
-
-  const bt = got.extend({
-    baseUrl: bt_url,
-    json: true,
-    headers: {
-      "x-api-key": api_key
-    }
-  });
   var dataFeedsTransformMap = [];
 
   for (let feedID of feedIDs) {
@@ -170,21 +155,6 @@ test.serial("Get all data points for Air Quality data from BT", async t => {
     })
     .times(feedIDs.length)
     .reply(201, {});
-
-  console.log(`TEST ALL: ${orion_url}`);
-
-  const orion = got.extend({
-    baseUrl: orion_url,
-    json: true
-  });
-
-  const bt = got.extend({
-    baseUrl: bt_url,
-    json: true,
-    headers: {
-      "x-api-key": api_key
-    }
-  });
 
   var dataFeedsTransformMap = [];
 
