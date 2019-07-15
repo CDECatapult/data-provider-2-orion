@@ -28,7 +28,7 @@ const idm = got.extend({
   form: true,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: `Bearer ${env.AUTHORIZATION_BEARER}`
+    Authorization: `Basic ${env.AUTHORIZATION_BEARER}`
   }
 });
 
