@@ -6,6 +6,10 @@ mock("parking.json", ["feed1", "feed2", "feed3"]);
 const api_key = "testkey";
 const bt_url = "http://bt";
 const orion_url = "http://orion";
+const idm_url = "http://idm";
+const AUTHORIZATION_BEARER = "jgfewiuhfoizjm";
+const user = "a@b.com";
+const password = "1234";
 
 const transformParking = require("./src/transformParking");
 const transformBicycleShare = require("./src/transformBicycleShare");
@@ -20,8 +24,25 @@ const airQualityOutput = require("./data/test/testOutputAirQuality.json");
 
 test.afterEach.always(() => nock.cleanAll());
 nock.disableNetConnect();
+const idm = got.extend({
+  baseUrl: idm_url,
+  form: true,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: `Bearer ${AUTHORIZATION_BEARER}`
+  }
+});
 
 test.serial("Get all data points for Parking data from BT", async t => {
+  let idmMock = nock(idm_url)
+    .post("/oauth2/token", "grant_type=password&user=a%40b.com&password=1234")
+    .reply(200, {
+      access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+      token_type: "Bearer",
+      expires_in: 3599,
+      refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+      scope: ["bearer"]
+    });
   let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
@@ -54,13 +75,30 @@ test.serial("Get all data points for Parking data from BT", async t => {
   for (let feedID of feedIDs) {
     dataFeedsTransformMap.push({ id: feedID, transform: transformParking });
   }
-  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
+  var resp = await getAndPublishAll(
+    bt,
+    orion,
+    dataFeedsTransformMap,
+    idm,
+    user,
+    password
+  );
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
+  t.is(idmMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
 });
 
 test.serial("Get all data points for Bicycle Share data from BT", async t => {
+  let idmMock = nock(idm_url)
+    .post("/oauth2/token", "grant_type=password&user=a%40b.com&password=1234")
+    .reply(200, {
+      access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+      token_type: "Bearer",
+      expires_in: 3599,
+      refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+      scope: ["bearer"]
+    });
   let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
@@ -96,13 +134,30 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       transform: transformBicycleShare
     });
   }
-  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
+  var resp = await getAndPublishAll(
+    bt,
+    orion,
+    dataFeedsTransformMap,
+    idm,
+    user,
+    password
+  );
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
+  t.is(idmMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
 });
 
 test.serial("Get all data points for Air Quality data from BT", async t => {
+  let idmMock = nock(idm_url)
+    .post("/oauth2/token", "grant_type=password&user=a%40b.com&password=1234")
+    .reply(200, {
+      access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+      token_type: "Bearer",
+      expires_in: 3599,
+      refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+      scope: ["bearer"]
+    });
   let btMock = nock(bt_url);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
@@ -136,8 +191,16 @@ test.serial("Get all data points for Air Quality data from BT", async t => {
   for (let feedID of feedIDs) {
     dataFeedsTransformMap.push({ id: feedID, transform: transformAirQuality });
   }
-  var resp = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
+  var resp = await getAndPublishAll(
+    bt,
+    orion,
+    dataFeedsTransformMap,
+    idm,
+    user,
+    password
+  );
   t.is(btMock.isDone(), true);
   t.is(orionMock.isDone(), true);
+  t.is(idmMock.isDone(), true);
   t.deepEqual(resp, "Got data from all feeds");
 });

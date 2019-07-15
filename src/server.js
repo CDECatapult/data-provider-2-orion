@@ -1,12 +1,24 @@
 const got = require("got");
 
-async function publishToBroker(data, dataBroker, fiwareService = null) {
+async function getAuthToken(idm, user, password) {
+  let resp = await idm.post("/oauth2/token", {
+    body: {
+      grant_type: "password",
+      user,
+      password
+    }
+  });
+  return resp.body.access_token;
+}
+
+async function publishToBroker(data, dataBroker, oauth2, fiwareService = null) {
   json_data = { actionType: "APPEND", entities: [data] };
   headers = {};
   if (fiwareService != null) {
     headers["Fiware-Service"] = fiwareService;
     headers["Fiware-Path"] = "/";
   }
+  headers["x-auth-token"] = oauth2;
   try {
     resp = (await dataBroker.post("/v2/op/update?options=keyValues", {
       body: json_data,
@@ -29,8 +41,12 @@ async function getDataFromProvider(feedID, dataProvider) {
 async function getAndPublishAll(
   dataProvider,
   dataBroker,
-  dataFeedTransformMap
+  dataFeedTransformMap,
+  idm,
+  idmUser,
+  idmPassword
 ) {
+  const oauth2 = await getAuthToken(idm, idmUser, idmPassword);
   for (let dataSource of dataFeedTransformMap) {
     dataFeedID = dataSource.id;
     transform = dataSource.transform;
@@ -41,6 +57,7 @@ async function getAndPublishAll(
       dataBroker,
       dataProvider,
       transform,
+      oauth2,
       fiwareService
     );
   }
@@ -52,13 +69,14 @@ async function getAndPublishOne(
   dataBroker,
   dataProvider,
   transform,
+  oauth2,
   fiwareService = null
 ) {
   //In milliseconds
   try {
     const data = await getDataFromProvider(feedID, dataProvider);
     const transformedData = transform(data);
-    return publishToBroker(transformedData, dataBroker, fiwareService);
+    return publishToBroker(transformedData, dataBroker, oauth2, fiwareService);
   } catch (err) {
     console.error(err);
   }

@@ -1,6 +1,6 @@
 const getAndPublishAll = require("./server");
 const got = require("got");
-const { cleanEnv, str } = require("envalid");
+const { cleanEnv, str, email, url } = require("envalid");
 const parkingIDs = require("../data/parkingFeedIDs.json");
 const bicycleIDs = require("../data/bicycleShareFeedIDs.json");
 const transformParking = require("./transformParking");
@@ -8,8 +8,12 @@ const transformBicycleShare = require("./transformBicycleShare");
 
 const env = cleanEnv(process.env, {
   PROVIDER_API_KEY: str(),
-  BT_URL: str(),
-  ORION_URL: str()
+  BT_URL: url(),
+  ORION_URL: url(),
+  AUTHORIZATION_URL: url(),
+  AUTHORIZATION_BEARER: str(),
+  IDM_EMAIL: email(),
+  IDM_PASSWORD: str()
 });
 const api_key = env.PROVIDER_API_KEY;
 const bt_url = env.BT_URL;
@@ -28,8 +32,17 @@ const bt = got.extend({
   }
 });
 
+const idm = got.extend({
+  baseUrl: env.AUTHORIZATION_URL,
+  form: true,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: `Bearer ${env.AUTHORIZATION_BEARER}`
+  }
+});
+
 // This is grouping each feed id with the corresponding transform function
-var dataFeedsTransformMap = [];
+let dataFeedsTransformMap = [];
 
 for (let parkingID of parkingIDs) {
   dataFeedsTransformMap.push({
@@ -48,7 +61,14 @@ for (let bicycleID of bicycleIDs) {
 }
 
 exports.handler = async event => {
-  const status = await getAndPublishAll(bt, orion, dataFeedsTransformMap);
+  const status = await getAndPublishAll(
+    bt,
+    orion,
+    dataFeedsTransformMap,
+    idm,
+    env.IDM_EMAIL,
+    env.IDM_PASSWORD
+  );
 
   const response = {
     statusCode: 200,
