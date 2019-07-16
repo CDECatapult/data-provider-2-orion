@@ -1,5 +1,11 @@
 function transform(data) {
-  var idString = data.locname.toString().replace(/[\\"'()]/g, "");
+  var idString = data.locname
+    .toString()
+    .replace(/[\\"'()]/g, "")
+    .replace("&", "")
+    .replace("/", "")
+    .replace("+", "")
+    .replace(".", "");
   var idArray = idString.split(" ");
   var id = idArray.join("");
   var streetAddress = data.locname.toString().replace(/[\\"'()]/g, "");

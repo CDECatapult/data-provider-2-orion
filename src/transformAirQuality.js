@@ -1,6 +1,12 @@
 function transform(data) {
   console.log("IN TRANSFORM AIR QUALITY");
-  var idString = data.title.toString().replace(/[\\"'()]/g, "");
+  var idString = data.title
+    .toString()
+    .replace(/[\\"'()]/g, "")
+    .replace("&", "")
+    .replace("/", "")
+    .replace("+", "")
+    .replace(".", "");
   var idArray = idString.split(" ");
   var id = idArray[idArray.length - 1];
 
