@@ -2,7 +2,8 @@ async function getAuthToken(idm, user, password) {
   const resp = await idm.post("/oauth2/token", {
     body: `grant_type=password&username=${user}&password=${password}`
   });
-  return resp.body.access_token;
+  const json = JSON.parse(resp.body)
+  return json.access_token;
 }
 
 async function publishToBroker(data, dataBroker, oauth2, fiwareService = null) {

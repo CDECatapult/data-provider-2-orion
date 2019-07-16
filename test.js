@@ -36,7 +36,12 @@ test.serial("Get all data points for Parking data from BT", async t => {
 
   const { handler } = mock.reRequire("./src");
 
-  let idmMock = nock(env.AUTHORIZATION_URL)
+  let idmMock = nock(env.AUTHORIZATION_URL, {
+    reqheaders: {
+      authorization: "Basic jgfewiuhfoizjm",
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  })
     .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
@@ -45,11 +50,19 @@ test.serial("Get all data points for Parking data from BT", async t => {
       refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
       scope: ["bearer"]
     });
+
   let btMock = nock(env.BT_URL);
   parkingFeedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, parkingInput);
   });
-  let orionMock = nock(env.ORION_URL)
+
+  let orionMock = nock(env.ORION_URL, {
+    reqheaders: {
+      "Fiware-Service": "manchester",
+      "Fiware-Path": "/",
+      "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
+    }
+  })
     .post("/v2/op/update?options=keyValues", body => {
       t.deepEqual(body, parkingOutput);
       return true;
@@ -71,7 +84,12 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
 
   const { handler } = mock.reRequire("./src");
 
-  let idmMock = nock(env.AUTHORIZATION_URL)
+  let idmMock = nock(env.AUTHORIZATION_URL, {
+    reqheaders: {
+      authorization: "Basic jgfewiuhfoizjm",
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  })
     .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
@@ -80,11 +98,19 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
       scope: ["bearer"]
     });
+
   let btMock = nock(env.BT_URL);
   bicycleShareFeedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, bicycleInput);
   });
-  let orionMock = nock(env.ORION_URL)
+
+  let orionMock = nock(env.ORION_URL, {
+    reqheaders: {
+      "Fiware-Service": "dublin",
+      "Fiware-Path": "/",
+      "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
+    }
+  })
     .post("/v2/op/update?options=keyValues", body => {
       t.deepEqual(body, bicycleOutput);
       return true;
