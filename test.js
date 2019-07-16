@@ -51,7 +51,11 @@ test.serial("Get all data points for Parking data from BT", async t => {
       scope: ["bearer"]
     });
 
-  let btMock = nock(env.BT_URL);
+  let btMock = nock(env.BT_URL, {
+    reqheaders: {
+      "x-api-key": "testkey"
+    }
+  });
   parkingFeedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, parkingInput);
   });
@@ -99,7 +103,11 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       scope: ["bearer"]
     });
 
-  let btMock = nock(env.BT_URL);
+  let btMock = nock(env.BT_URL, {
+    reqheaders: {
+      "x-api-key": "testkey"
+    }
+  });
   bicycleShareFeedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, bicycleInput);
   });
