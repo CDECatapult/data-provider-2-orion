@@ -26,7 +26,9 @@ test.afterEach.always(() => {
   nock.cleanAll();
   mock.stopAll();
 });
+
 nock.disableNetConnect();
+
 test.serial("Get all data points for Parking data from BT", async t => {
   mock("./data/parkingFeedIDs.json", parkingFeedIDs);
   mock("./data/bicycleShareFeedIDs.json", []);
@@ -35,7 +37,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
   const { handler } = mock.reRequire("./src");
 
   let idmMock = nock(env.AUTHORIZATION_URL)
-    .post("/oauth2/token")
+    .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",
@@ -70,7 +72,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
   const { handler } = mock.reRequire("./src");
 
   let idmMock = nock(env.AUTHORIZATION_URL)
-    .post("/oauth2/token")
+    .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",
