@@ -42,7 +42,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-    .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
+    .post("/oauth2/token", "grant_type=password&username=a%40b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",
@@ -94,7 +94,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-    .post("/oauth2/token", "grant_type=password&username=a@b.com&password=1234")
+    .post("/oauth2/token", "grant_type=password&username=a%40b.com&password=1234")
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",

@@ -25,8 +25,9 @@ const bt = got.extend({
 
 const idm = got.extend({
   baseUrl: env.AUTHORIZATION_URL,
+  form: true,
+  json: true,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
     Authorization: `Basic ${env.AUTHORIZATION_BEARER}`
   }
 });
