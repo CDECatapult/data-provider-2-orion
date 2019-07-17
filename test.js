@@ -7,7 +7,7 @@ const bicycleShareFeedIDs = ["feed4", "feed5", "feed6"];
 //const airqualityFeedIDs = ["feed7", "feed8", "feed9"];
 const env = {
   PROVIDER_API_KEY: "testkey",
-  BT_URL: "http://bt",
+  BT_DATAHUB_URL: "http://bt",
   CONTEXT_BROKER_URL: "http://orion",
   IDM_URL: "http://idm",
   AUTHORIZATION_BEARER: "jgfewiuhfoizjm",
@@ -51,7 +51,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
       scope: ["bearer"]
     });
 
-  let btMock = nock(env.BT_URL, {
+  let btMock = nock(env.BT_DATAHUB_URL, {
     reqheaders: {
       "x-api-key": "testkey"
     }
@@ -103,7 +103,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       scope: ["bearer"]
     });
 
-  let btMock = nock(env.BT_URL, {
+  let btMock = nock(env.BT_DATAHUB_URL, {
     reqheaders: {
       "x-api-key": "testkey"
     }
@@ -142,7 +142,7 @@ test.serial("Get all data points for Air Quality data from BT", async t => {
       refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
       scope: ["bearer"]
     });
-  let btMock = nock(env.BT_URL);
+  let btMock = nock(env.BT_DATAHUB_URL);
   let feedIDs = ["feed1", "feed2"];
   feedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, airQualityInput);
