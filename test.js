@@ -9,7 +9,7 @@ const env = {
   PROVIDER_API_KEY: "testkey",
   BT_URL: "http://bt",
   CONTEXT_BROKER_URL: "http://orion",
-  AUTHORIZATION_URL: "http://idm",
+  IDM_URL: "http://idm",
   AUTHORIZATION_BEARER: "jgfewiuhfoizjm",
   IDM_USERNAME: "a@b.com",
   IDM_PASSWORD: "1234"
@@ -36,7 +36,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
 
   const { handler } = mock.reRequire("./src");
 
-  let idmMock = nock(env.AUTHORIZATION_URL, {
+  let idmMock = nock(env.IDM_URL, {
     reqheaders: {
       authorization: "Basic jgfewiuhfoizjm",
       "Content-Type": "application/x-www-form-urlencoded"
@@ -88,7 +88,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
 
   const { handler } = mock.reRequire("./src");
 
-  let idmMock = nock(env.AUTHORIZATION_URL, {
+  let idmMock = nock(env.IDM_URL, {
     reqheaders: {
       authorization: "Basic jgfewiuhfoizjm",
       "Content-Type": "application/x-www-form-urlencoded"

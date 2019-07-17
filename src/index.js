@@ -23,7 +23,7 @@ const bt = got.extend({
 });
 
 const idm = got.extend({
-  baseUrl: env.AUTHORIZATION_URL,
+  baseUrl: env.IDM_URL,
   form: true,
   json: true,
   headers: {
