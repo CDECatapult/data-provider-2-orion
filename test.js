@@ -11,7 +11,7 @@ const env = {
   ORION_URL: "http://orion",
   AUTHORIZATION_URL: "http://idm",
   AUTHORIZATION_BEARER: "jgfewiuhfoizjm",
-  IDM_EMAIL: "a@b.com",
+  IDM_USERNAME: "a@b.com",
   IDM_PASSWORD: "1234"
 };
 

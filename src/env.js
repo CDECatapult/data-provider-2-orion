@@ -6,7 +6,7 @@ const env = cleanEnv(process.env, {
   ORION_URL: url(),
   AUTHORIZATION_URL: url(),
   AUTHORIZATION_BEARER: str(),
-  IDM_EMAIL: email(),
+  IDM_USERNAME: email(),
   IDM_PASSWORD: str()
 });
 

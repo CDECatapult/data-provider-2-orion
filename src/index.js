@@ -57,7 +57,7 @@ exports.handler = async event => {
     orion,
     dataFeedsTransformMap,
     idm,
-    env.IDM_EMAIL,
+    env.IDM_USERNAME,
     env.IDM_PASSWORD
   );
 
