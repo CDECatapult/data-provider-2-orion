@@ -24,7 +24,7 @@ const idm = got.extend({
   form: true,
   json: true,
   headers: {
-    Authorization: `Basic ${env.AUTHORIZATION_BEARER}`
+    Authorization: `Basic ${env.IDM_APP_AUTH_TOKEN}`
   }
 });
 

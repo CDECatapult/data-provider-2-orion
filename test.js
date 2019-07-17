@@ -10,7 +10,7 @@ const env = {
   BT_DATAHUB_URL: "http://bt",
   CONTEXT_BROKER_URL: "http://orion",
   IDM_URL: "http://idm",
-  AUTHORIZATION_BEARER: "jgfewiuhfoizjm",
+  IDM_APP_AUTH_TOKEN: "jgfewiuhfoizjm",
   IDM_USERNAME: "a@b.com",
   IDM_PASSWORD: "1234"
 };
