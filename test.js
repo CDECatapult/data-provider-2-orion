@@ -6,7 +6,7 @@ const parkingFeedIDs = ["feed1", "feed2", "feed3"];
 const bicycleShareFeedIDs = ["feed4", "feed5", "feed6"];
 //const airqualityFeedIDs = ["feed7", "feed8", "feed9"];
 const env = {
-  PROVIDER_API_KEY: "testkey",
+  BT_DATAHUB_API_KEY: "testkey",
   BT_DATAHUB_URL: "http://bt",
   CONTEXT_BROKER_URL: "http://orion",
   IDM_URL: "http://idm",

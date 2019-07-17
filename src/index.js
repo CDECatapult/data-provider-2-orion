@@ -6,8 +6,6 @@ const transformParking = require("./transformParking");
 const transformBicycleShare = require("./transformBicycleShare");
 const env = require("./env");
 
-const api_key = env.PROVIDER_API_KEY;
-
 const orion = got.extend({
   baseUrl: env.CONTEXT_BROKER_URL,
   json: true
@@ -17,7 +15,7 @@ const bt = got.extend({
   baseUrl: env.BT_DATAHUB_URL,
   json: true,
   headers: {
-    "x-api-key": api_key
+    "x-api-key": env.BT_DATAHUB_API_KEY
   }
 });
 
