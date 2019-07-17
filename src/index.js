@@ -8,10 +8,9 @@ const env = require("./env");
 
 const api_key = env.PROVIDER_API_KEY;
 const bt_url = env.BT_URL;
-const orion_url = env.ORION_URL;
 
 const orion = got.extend({
-  baseUrl: orion_url,
+  baseUrl: env.CONTEXT_BROKER_URL,
   json: true
 });
 

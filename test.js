@@ -8,7 +8,7 @@ const bicycleShareFeedIDs = ["feed4", "feed5", "feed6"];
 const env = {
   PROVIDER_API_KEY: "testkey",
   BT_URL: "http://bt",
-  ORION_URL: "http://orion",
+  CONTEXT_BROKER_URL: "http://orion",
   AUTHORIZATION_URL: "http://idm",
   AUTHORIZATION_BEARER: "jgfewiuhfoizjm",
   IDM_USERNAME: "a@b.com",
@@ -60,7 +60,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
     btMock = btMock.get(`/${feedID}`).reply(200, parkingInput);
   });
 
-  let orionMock = nock(env.ORION_URL, {
+  let orionMock = nock(env.CONTEXT_BROKER_URL, {
     reqheaders: {
       "Fiware-Service": "manchester",
       "Fiware-Path": "/",
@@ -112,7 +112,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
     btMock = btMock.get(`/${feedID}`).reply(200, bicycleInput);
   });
 
-  let orionMock = nock(env.ORION_URL, {
+  let orionMock = nock(env.CONTEXT_BROKER_URL, {
     reqheaders: {
       "Fiware-Service": "dublin",
       "Fiware-Path": "/",
@@ -147,7 +147,7 @@ test.serial("Get all data points for Air Quality data from BT", async t => {
   feedIDs.forEach(feedID => {
     btMock = btMock.get(`/${feedID}`).reply(200, airQualityInput);
   });
-  let orionMock = nock(env.ORION_URL)
+  let orionMock = nock(env.CONTEXT_BROKER_URL)
     .post("/v2/op/update?options=keyValues", body => {
       t.deepEqual(body, airQualityOutput);
       return true;
