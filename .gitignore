@@ -1,7 +1,7 @@
 *.DS_Store
 *.zip
 node_modules
+.ackrc
 .env
 fileWriting.js
 DATA.txt
-
