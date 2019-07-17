@@ -48,7 +48,7 @@ for (let bicycleID of bicycleIDs) {
 }
 
 exports.handler = async event => {
-  const status = await getAndPublishAll(
+  const { published, errors } = await getAndPublishAll(
     bt,
     orion,
     dataFeedsTransformMap,
@@ -59,7 +59,7 @@ exports.handler = async event => {
 
   const response = {
     statusCode: 200,
-    body: status
+    body: `Published: ${published}, errors: ${errors}`
   };
 
   return response;

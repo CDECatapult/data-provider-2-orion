@@ -15,49 +15,16 @@ async function publishToBroker(data, dataBroker, oauth2, fiwareService = null) {
     headers["Fiware-Path"] = "/";
   }
 
-  try {
-    const resp = await dataBroker.post("/v2/op/update?options=keyValues", {
-      body: { actionType: "APPEND", entities: [data] },
-      headers
-    });
-    return resp;
-  } catch (err) {
-    console.log(`ERROR IN publishToBroker`, err);
-  }
+  const resp = await dataBroker.post("/v2/op/update?options=keyValues", {
+    body: { actionType: "APPEND", entities: [data] },
+    headers
+  });
+  return resp;
 }
 
 async function getDataFromProvider(feedID, dataProvider) {
-  try {
-    return (await dataProvider.get(feedID)).body;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function getAndPublishAll(
-  dataProvider,
-  dataBroker,
-  dataFeedTransformMap,
-  idm,
-  idmUser,
-  idmPassword
-) {
-  const oauth2 = await getAuthToken(idm, idmUser, idmPassword);
-  for (let dataSource of dataFeedTransformMap) {
-    dataFeedID = dataSource.id;
-    transform = dataSource.transform;
-    fiwareService = dataSource.fiwareService;
-
-    let resp = await getAndPublishOne(
-      dataFeedID,
-      dataBroker,
-      dataProvider,
-      transform,
-      oauth2,
-      fiwareService
-    );
-  }
-  return "Got data from all feeds";
+  const resp = await dataProvider.get(feedID);
+  return resp.body;
 }
 
 async function getAndPublishOne(
@@ -68,13 +35,56 @@ async function getAndPublishOne(
   oauth2,
   fiwareService = null
 ) {
-  try {
-    const data = await getDataFromProvider(feedID, dataProvider);
-    const transformedData = transform(data);
-    return publishToBroker(transformedData, dataBroker, oauth2, fiwareService);
-  } catch (err) {
-    console.error(err);
+  console.log(`Getting data from provider (feedId = ${feedID})...`);
+  const data = await getDataFromProvider(feedID, dataProvider);
+  console.log("Got data from provider");
+
+  console.log("Transforming data...");
+  const transformedData = transform(data);
+  console.log("Data transformed");
+
+  console.log("Publishing data...");
+  await publishToBroker(transformedData, dataBroker, oauth2, fiwareService);
+  console.log("Data published");
+}
+
+async function getAndPublishAll(
+  dataProvider,
+  dataBroker,
+  dataFeedTransformMap,
+  idm,
+  idmUser,
+  idmPassword
+) {
+  console.log("Getting auth token from IDM...");
+  const oauth2 = await getAuthToken(idm, idmUser, idmPassword);
+  console.log("Got auth token from IDM");
+
+  let published = 0;
+  let errors = 0;
+
+  for (const dataSource of dataFeedTransformMap) {
+    const { id: dataFeedID, transform, fiwareService } = dataSource;
+
+    try {
+      await getAndPublishOne(
+        dataFeedID,
+        dataBroker,
+        dataProvider,
+        transform,
+        oauth2,
+        fiwareService
+      );
+      published++;
+    } catch (err) {
+      console.error(
+        `Error while processing data feed ${dataFeedID} with fiwareService ${fiwareService}`,
+        err
+      );
+      errors++;
+    }
   }
+  return { published, errors };
 }
 
 module.exports = getAndPublishAll;
