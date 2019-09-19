@@ -1,0 +1,116 @@
+{
+  "actionType": "APPEND",
+  "entities": [
+    {
+      "id": "urn:ngsiv2:WeatherForecast:manchester:3351",
+      "type": "WeatherForecast",
+      "address": {
+        "value": {
+          "addressCountry": "UK",
+          "addressLocality": "Manchester",
+          "streetAddress": "Rostherne No 2"
+        },
+        "type": "object"
+      },
+      "name": {
+        "value": "Met Office Datapoint Forecast for next 3h - Rostherne No 2 site 3351",
+        "type": "Text"
+      },
+      "location": {
+        "value": {
+          "coordinates": [-2.3805000000000000604, 5.33597999999999998977e1],
+          "type": "Point"
+        },
+        "type": "geo:json"
+      },
+      "": {
+        "value": "4",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "visibility": {
+        "value": "400",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "pressureTendency": {
+        "value": "steady",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "atmosphericPressure": {
+        "value": "1",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "dewPoint": {
+        "value": "1",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "humidity": {
+        "value": "83",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "windSpeed": {
+        "value": "2",
+
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "windDirection": {
+        "value": 180,
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      },
+      "temperature": {
+        "value": "16",
+        "metadata": {
+          "timestamp": {
+            "type": "DateTime",
+            "value": "2019-09-11T22:00:00.000Z"
+          }
+        }
+      }
+    }
+  ]
+}

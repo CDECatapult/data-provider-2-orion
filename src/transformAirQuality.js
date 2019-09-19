@@ -34,17 +34,34 @@ function transform(data) {
     }
   };
   for (let stream of data.streams) {
-    var measurand = stream.tags[0];
-    if (measurand == "period" || measurand == "quality") {
-      continue;
-    }
-    var value = stream.current_value;
     var unitCode = "";
     if (stream.unit_symbol == "μg/m3") {
       unitCode = "GQ";
     } else if (stream.unit_symbol == "ppb") {
       unitCode = "61";
     }
+    var value = stream.current_value;
+    var measurand = "";
+    switch (stream.tags[0]) {
+      case '"Nitrogen monoxide in air"':
+        measurand = "NO";
+        break;
+      case '"Sulphur dioxide in air"':
+        measurand = "SO2";
+        break;
+      case '"Nitrogen dioxide in air"':
+        measurand = NO2;
+        break;
+      case '"Ozone in air"':
+        measurand = "O3";
+        break;
+      case '"Nitrogen oxides in air"':
+        measurand = "NO";
+        break;
+      default:
+        measurand = "NotCurrentlySupported";
+    }
+
     var timestamp = new Date(stream.current_time).toISOString();
 
     transformed[measurand] = {

@@ -2,8 +2,12 @@ const getAndPublishAll = require("./server");
 const got = require("got");
 const parkingIDs = require("../data/parkingFeedIDs.json");
 const bicycleIDs = require("../data/bicycleShareFeedIDs.json");
+const weatherObservedIDs = require("../data/weatherObservedFeedIDs.json");
+const weatherForecastIDs = require("../data/weatherForecastFeedIDs.json");
 const transformParking = require("./transformParking");
 const transformBicycleShare = require("./transformBicycleShare");
+const transformWeatherObserved = require("./transformWeatherObserved");
+const transformWeatherForecast = require("./transformWeatherForecast");
 const env = require("./env");
 
 const orion = got.extend({
@@ -44,6 +48,22 @@ for (let bicycleID of bicycleIDs) {
     id: bicycleID,
     transform: transformBicycleShare,
     fiwareService: "dublin"
+  });
+}
+
+for (let weatherObservedID of weatherObservedIDs) {
+  dataFeedsTransformMap.push({
+    id: weatherObservedID,
+    transform: transformWeatherObserved,
+    fiwareService: "manchester"
+  });
+}
+
+for (let weatherForecastID of weatherForecastIDs) {
+  dataFeedsTransformMap.push({
+    id: weatherForecastID,
+    transform: transformWeatherForecast,
+    fiwareService: "manchester"
   });
 }
 

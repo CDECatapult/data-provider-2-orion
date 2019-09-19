@@ -4,7 +4,9 @@ const mock = require("mock-require");
 
 const parkingFeedIDs = ["feed1", "feed2", "feed3"];
 const bicycleShareFeedIDs = ["feed4", "feed5", "feed6"];
-//const airqualityFeedIDs = ["feed7", "feed8", "feed9"];
+const weatherObservedFeedIDs = ["feed7", "feed8", "feed9"];
+const weatherForecastFeedIDs = ["feed10", "feed11", "feed12"];
+const airqualityFeedIDs = ["feed13", "feed14", "feed15"];
 const env = {
   BT_DATAHUB_API_KEY: "testkey",
   BT_DATAHUB_URL: "http://bt",
@@ -19,6 +21,10 @@ const parkingInput = require("./data/test/testInputParking.json");
 const parkingOutput = require("./data/test/testOutputParkingKeyValue.json");
 const bicycleInput = require("./data/test/testInputBicycleShare.json");
 const bicycleOutput = require("./data/test/testOutputBicycleShare.json");
+const weatherObservedInput = require("./data/test/testInputWeatherObserved.json");
+const weatherObservedOutput = require("./data/test/testOutputWeatherObserved.json");
+const weatherForecastInput = require("./data/test/testInputWeatherForecast.json");
+const weatherForecastOutput = require("./data/test/testOutputWeatherForecast.json");
 //const airQualityInput = require("./data/test/testInputAirQuality.json");
 //const airQualityOutput = require("./data/test/testOutputAirQuality.json");
 
@@ -32,6 +38,8 @@ nock.disableNetConnect();
 test.serial("Get all data points for Parking data from BT", async t => {
   mock("./data/parkingFeedIDs.json", parkingFeedIDs);
   mock("./data/bicycleShareFeedIDs.json", []);
+  mock("./data/weatherObservedFeedIDs.json", []);
+  mock("./data/weatherForecastFeedIDs.json", []);
   mock("./src/env", env);
 
   const { handler } = mock.reRequire("./src");
@@ -42,7 +50,10 @@ test.serial("Get all data points for Parking data from BT", async t => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-    .post("/oauth2/token", "grant_type=password&username=a%40b.com&password=1234")
+    .post(
+      "/oauth2/token",
+      "grant_type=password&username=a%40b.com&password=1234"
+    )
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",
@@ -84,6 +95,8 @@ test.serial("Get all data points for Parking data from BT", async t => {
 test.serial("Get all data points for Bicycle Share data from BT", async t => {
   mock("./data/parkingFeedIDs.json", []);
   mock("./data/bicycleShareFeedIDs.json", bicycleShareFeedIDs);
+  mock("./data/weatherObservedFeedIDs.json", []);
+  mock("./data/weatherForecastFeedIDs.json", []);
   mock("./src/env", env);
 
   const { handler } = mock.reRequire("./src");
@@ -94,7 +107,10 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-    .post("/oauth2/token", "grant_type=password&username=a%40b.com&password=1234")
+    .post(
+      "/oauth2/token",
+      "grant_type=password&username=a%40b.com&password=1234"
+    )
     .reply(200, {
       access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
       token_type: "Bearer",
@@ -131,45 +147,121 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
   t.is(orionMock.isDone(), true);
   t.is(idmMock.isDone(), true);
 });
-/*
-test.serial("Get all data points for Air Quality data from BT", async t => {
-  let idmMock = nock(env.IDM_URL)
-    .post("/oauth2/token", "grant_type=password&user=a%40b.com&password=1234")
-    .reply(200, {
-      access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
-      token_type: "Bearer",
-      expires_in: 3599,
-      refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
-      scope: ["bearer"]
-    });
-  let btMock = nock(env.BT_DATAHUB_URL);
-  let feedIDs = ["feed1", "feed2"];
-  feedIDs.forEach(feedID => {
-    btMock = btMock.get(`/${feedID}`).reply(200, airQualityInput);
-  });
-  let orionMock = nock(env.CONTEXT_BROKER_URL)
-    .post("/v2/op/update?options=keyValues", body => {
-      t.deepEqual(body, airQualityOutput);
-      return true;
+
+test.serial(
+  "Get all data points for Weather Observed data from BT",
+  async t => {
+    mock("./data/parkingFeedIDs.json", []);
+    mock("./data/bicycleShareFeedIDs.json", []);
+    mock("./data/weatherObservedFeedIDs.json", weatherObservedFeedIDs);
+    mock("./data/weatherForecastFeedIDs.json", []);
+    mock("./src/env", env);
+
+    const { handler } = mock.reRequire("./src");
+
+    let idmMock = nock(env.IDM_URL, {
+      reqheaders: {
+        authorization: "Basic jgfewiuhfoizjm",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     })
-    .times(feedIDs.length)
-    .reply(201, {});
+      .post(
+        "/oauth2/token",
+        "grant_type=password&username=a%40b.com&password=1234"
+      )
+      .reply(200, {
+        access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+        token_type: "Bearer",
+        expires_in: 3599,
+        refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+        scope: ["bearer"]
+      });
 
-  var dataFeedsTransformMap = [];
+    let btMock = nock(env.BT_DATAHUB_URL, {
+      reqheaders: {
+        "x-api-key": "testkey"
+      }
+    });
+    weatherObservedFeedIDs.forEach(feedID => {
+      btMock = btMock.get(`/${feedID}`).reply(200, weatherObservedInput);
+    });
 
-  for (let feedID of feedIDs) {
-    dataFeedsTransformMap.push({ id: feedID, transform: transformAirQuality });
+    let orionMock = nock(env.CONTEXT_BROKER_URL, {
+      reqheaders: {
+        "Fiware-Service": "manchester",
+        "Fiware-Path": "/",
+        "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
+      }
+    })
+      .post("/v2/op/update?options=keyValues", body => {
+        t.deepEqual(body, weatherObservedOutput);
+        return true;
+      })
+      .times(weatherObservedFeedIDs.length)
+      .reply(201, {});
+
+    await handler();
+    t.is(btMock.isDone(), true);
+    t.is(orionMock.isDone(), true);
+    t.is(idmMock.isDone(), true);
   }
-  var resp = await getAndPublishAll(
-    bt,
-    orion,
-    dataFeedsTransformMap,
-    idm,
-    user,
-    password
-  );
-  t.is(btMock.isDone(), true);
-  t.is(orionMock.isDone(), true);
-  t.is(idmMock.isDone(), true);
-  t.deepEqual(resp, "Got data from all feeds");
-});*/
+);
+
+test.serial(
+  "Get all data points for Weather Forecast data from BT",
+  async t => {
+    mock("./data/parkingFeedIDs.json", []);
+    mock("./data/bicycleShareFeedIDs.json", []);
+    mock("./data/weatherObservedFeedIDs.json", []);
+    mock("./data/weatherForecastFeedIDs.json", weatherForecastFeedIDs);
+    mock("./src/env", env);
+
+    const { handler } = mock.reRequire("./src");
+
+    let idmMock = nock(env.IDM_URL, {
+      reqheaders: {
+        authorization: "Basic jgfewiuhfoizjm",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+      .post(
+        "/oauth2/token",
+        "grant_type=password&username=a%40b.com&password=1234"
+      )
+      .reply(200, {
+        access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+        token_type: "Bearer",
+        expires_in: 3599,
+        refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+        scope: ["bearer"]
+      });
+
+    let btMock = nock(env.BT_DATAHUB_URL, {
+      reqheaders: {
+        "x-api-key": "testkey"
+      }
+    });
+    weatherForecastFeedIDs.forEach(feedID => {
+      btMock = btMock.get(`/${feedID}`).reply(200, weatherForecastInput);
+    });
+
+    let orionMock = nock(env.CONTEXT_BROKER_URL, {
+      reqheaders: {
+        "Fiware-Service": "manchester",
+        "Fiware-Path": "/",
+        "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
+      }
+    })
+      .post("/v2/op/update?options=keyValues", body => {
+        t.deepEqual(body, weatherForecastOutput);
+        return true;
+      })
+      .times(weatherForecastFeedIDs.length)
+      .reply(201, {});
+
+    await handler();
+    t.is(btMock.isDone(), true);
+    t.is(orionMock.isDone(), true);
+    t.is(idmMock.isDone(), true);
+  }
+);
