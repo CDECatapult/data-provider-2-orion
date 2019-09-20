@@ -12,10 +12,6 @@
         },
         "type": "object"
       },
-      "location": {
-        "value": { "coordinates": [-2.239218, 53.371307], "type": "Point" },
-        "type": "geo:json"
-      },
       "O3": {
         "value": "22.35184",
         "metadata": {

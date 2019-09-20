@@ -5,10 +5,20 @@ function transform(data) {
     .replace("&", "")
     .replace("/", "")
     .replace("+", "")
-    .replace(".", "");
+    .replace(".", "")
+    .replace(";", "")
+    .replace("&apos;s", "");
   var idArray = idString.split(" ");
   var id = idArray.join("");
-  var streetAddress = data.locname.toString().replace(/[\\"'()]/g, "");
+  var streetAddress = data.locname
+    .toString()
+    .replace(/[\\"'()]/g, "")
+    .replace("&", "")
+    .replace("/", "")
+    .replace("+", "")
+    .replace(".", "")
+    .replace(";", "")
+    .replace("&apos;s", "");
   var type = "BikeHireDockingStation";
 
   for (let stream of data.streams) {
@@ -39,6 +49,14 @@ function transform(data) {
     status: {
       value: status
     },
+    address: {
+      value: {
+        addressCountry: "UK",
+        addressLocality: "Manchester",
+        streetAddress: streetAddress
+      },
+      type: "object"
+    },
     availableBikeNumber: {
       value: availableBikeNumber,
       metadata: {
@@ -65,13 +83,6 @@ function transform(data) {
           value: timestampTSN
         }
       }
-    },
-    location: {
-      value: {
-        coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
-        type: "Point"
-      },
-      type: "geo:json"
     }
   };
   return transformed;

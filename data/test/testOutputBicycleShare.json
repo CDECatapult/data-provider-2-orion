@@ -7,6 +7,14 @@
       "status": {
         "value": "CLOSED"
       },
+      "address": {
+        "value": {
+          "addressCountry": "UK",
+          "addressLocality": "Manchester",
+          "streetAddress": "Smithfield"
+        },
+        "type": "object"
+      },
       "availableBikeNumber": {
         "value": 0,
         "metadata": {
@@ -32,13 +40,6 @@
             "type": "DateTime",
             "value": "2019-07-05T09:34:40.000Z"
           }
-        }
-      },
-      "location": {
-        "type": "geo:json",
-        "value": {
-          "type": "Point",
-          "coordinates": [-6.27821400000000018338, 5.33476900000000000546e1]
         }
       }
     }

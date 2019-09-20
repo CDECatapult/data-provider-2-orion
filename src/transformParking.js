@@ -28,10 +28,18 @@ function transform(data) {
     .replace("&", "")
     .replace("/", "")
     .replace("+", "")
-    .replace(".", "");
+    .replace(".", "")
+    .replace(";", "");
   var idArray = idString.split(" ");
   var id = idArray.join("");
-  var streetAddress = data.locname.toString().replace(/[\\"'()]/g, "");
+  var streetAddress = data.locname
+    .toString()
+    .replace(/[\\"'()]/g, "")
+    .replace("&", "")
+    .replace("/", "")
+    .replace("+", "")
+    .replace(".", "")
+    .replace(";", "");
   var type = getType(streetAddress);
 
   let transformed = {
@@ -44,13 +52,6 @@ function transform(data) {
         streetAddress: streetAddress
       },
       type: "object"
-    },
-    location: {
-      value: {
-        coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
-        type: "Point"
-      },
-      type: "geo:json"
     },
     name: {
       value: data.title.toString().replace(/[\\"'()]/g, ""),

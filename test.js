@@ -82,7 +82,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update?options=keyValues", body => {
+    .post("/v2/op/update", body => {
       t.deepEqual(body, parkingOutput);
       return true;
     })
@@ -140,7 +140,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update?options=keyValues", body => {
+    .post("/v2/op/update", body => {
       t.deepEqual(body, bicycleOutput);
       return true;
     })
@@ -199,7 +199,7 @@ test.serial(
         "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
       }
     })
-      .post("/v2/op/update?options=keyValues", body => {
+      .post("/v2/op/update", body => {
         t.deepEqual(body, weatherObservedOutput);
         return true;
       })
@@ -259,7 +259,7 @@ test.serial(
         "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
       }
     })
-      .post("/v2/op/update?options=keyValues", body => {
+      .post("/v2/op/update", body => {
         t.deepEqual(body, weatherForecastOutput);
         return true;
       })
@@ -316,7 +316,7 @@ test.serial("Get all data points for AirQuality data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update?options=keyValues", body => {
+    .post("/v2/op/update", body => {
       let oneOrOther =
         equal(body, airQualityOutput1) || equal(body, airQualityOutput2);
       if (!oneOrOther) {

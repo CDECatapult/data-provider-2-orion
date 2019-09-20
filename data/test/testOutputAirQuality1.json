@@ -12,10 +12,6 @@
         },
         "type": "object"
       },
-      "location": {
-        "value": { "coordinates": [-2.237881, 53.48152], "type": "Point" },
-        "type": "geo:json"
-      },
       "PM25": {
         "value": "10.8",
         "metadata": {

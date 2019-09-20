@@ -6,7 +6,8 @@ function transform(data) {
     .replace("&", "")
     .replace("/", "")
     .replace("+", "")
-    .replace(".", "");
+    .replace(".", "")
+    .replace(";", "");
   var idArray = idString.split(" ");
   var id = idArray[idArray.length - 1];
 
@@ -17,20 +18,21 @@ function transform(data) {
       value: {
         addressCountry: "UK",
         addressLocality: "Manchester",
-        streetAddress: data.locname.toString().replace(/[\\"'()]/g, "")
+        streetAddress: data.locname
+          .toString()
+          .replace(/[\\"'()]/g, "")
+          .replace(/[\\"'()]/g, "")
+          .replace("&", "")
+          .replace("/", "")
+          .replace("+", "")
+          .replace(".", "")
+          .replace(";", "")
       },
       type: "object"
     },
     name: {
       value: data.title.toString().replace(/[\\"'()]/g, ""),
       type: "Text"
-    },
-    location: {
-      value: {
-        coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
-        type: "Point"
-      },
-      type: "geo:json"
     }
   };
   for (let stream of data.streams) {
