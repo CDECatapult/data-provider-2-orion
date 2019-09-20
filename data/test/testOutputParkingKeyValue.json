@@ -42,10 +42,7 @@
         "value": ["none"],
         "type": "Text"
       },
-      "permitActiveHours": {
-        "type": "None",
-        "value": ["noPermitNeeded"]
-      },
+      "permitActiveHours": {},
       "requiredPermit": {
         "value": ["noPermitNeeded"],
         "type": "Text"

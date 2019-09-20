@@ -69,10 +69,6 @@ function transform(data) {
       value: ["noPermitNeeded"],
       type: "Text"
     },
-    permitActiveHours: {
-      value: ["noPermitNeeded"],
-      type: "None"
-    },
     chargeType: {
       value: ["free"],
       type: "Text"
@@ -102,6 +98,9 @@ function transform(data) {
       }
     }
   };
+  if (type == "OnStreetParking") {
+    transformed.permitActiveHours = {};
+  }
   return transformed;
 }
 
