@@ -1,5 +1,4 @@
 function transform(data) {
-  console.log("IN TRANSFORM WEATHER FORECAST");
   var idString = data.locname
     .toString()
     .replace(/[\\"'()]/g, "")
@@ -120,7 +119,7 @@ function transform(data) {
     }
 
     var timestamp = new Date(stream.current_time).toISOString();
-    if (attribute != "NotCurrentlySupported") {
+    if (attribute != "NotCurrentlySupported" && attribute != "") {
       transformed[attribute] = {
         value: value,
         metadata: {
@@ -132,7 +131,6 @@ function transform(data) {
       };
     }
   }
-  console.log(transformed);
   return transformed;
 }
 

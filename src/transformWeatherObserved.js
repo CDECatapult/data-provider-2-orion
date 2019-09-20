@@ -119,7 +119,7 @@ function transform(data) {
     }
 
     var timestamp = new Date(stream.current_time).toISOString();
-    if (attribute != "NotCurrentlySupported") {
+    if (attribute != "NotCurrentlySupported" && attribute != "") {
       transformed[attribute] = {
         value: value,
         metadata: {

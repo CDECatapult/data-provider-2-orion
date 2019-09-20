@@ -16,16 +16,6 @@
         "value": "Met Office Datapoint Forecast for next 3h - Rostherne No 2 site 3351",
         "type": "Text"
       },
-      "": {
-        "value": "4",
-
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-09-11T22:00:00.000Z"
-          }
-        }
-      },
       "visibility": {
         "value": "400",
 

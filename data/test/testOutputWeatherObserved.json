@@ -16,16 +16,7 @@
         "value": "Met Office Datapoint Observations - Rostherne No 2 site 3351",
         "type": "Text"
       },
-      "": {
-        "value": "30",
 
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-09-11T22:00:00.000Z"
-          }
-        }
-      },
       "visibility": {
         "value": "400",
 
