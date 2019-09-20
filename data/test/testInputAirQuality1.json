@@ -1,0 +1,89 @@
+{
+  "id": "a4a4d354-d01d-4077-9f9f-1b1bf4bbb1c7",
+  "creator": "euit001",
+  "updated": "Mon, 05 Aug 2019 12:23:52 GMT",
+  "title": "Manchester Piccadilly Air Quality (DEFRA)",
+  "url": "/feeds/a4a4d354-d01d-4077-9f9f-1b1bf4bbb1c7",
+  "private": "false",
+  "description": "Air quality data from Manchester Piccadilly station (DEFRA)",
+  "tags": ["\"Air quality\""],
+  "locname": "Manchester Piccadilly",
+  "lon": -2.23788099999999978706,
+  "lat": 5.34815200000000032787e1,
+  "ele": 5.7e1,
+  "website": "https://uk-air.defra.gov.uk/data/about_sos",
+  "streams": [
+    {
+      "id": 6410,
+      "tags": ["\"Volatile PM2.5\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "-1.4",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 6411,
+      "tags": ["\"Non-volatile PM2.5\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "12.2",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 38,
+      "tags": ["\"Nitrogen monoxide in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "37.66846",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 6001,
+      "tags": ["\"Particulate matter under 2.5 micro m (aerosol)\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "10.8",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 1,
+      "tags": ["\"Sulphur dioxide in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "1.66306",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 8,
+      "tags": ["\"Nitrogen dioxide in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "54.6975",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 7,
+      "tags": ["\"Ozone in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "10.37764",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 9,
+      "tags": ["\"Nitrogen oxides in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "112.455",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "actionType": "APPEND",
+  "entities": [
+    {
+      "id": "urn:ngsiv2:AirQualityObserved:manchester:Sharston",
+      "type": "AirQualityObserved",
+      "address": {
+        "value": {
+          "addressCountry": "UK",
+          "addressLocality": "Manchester",
+          "streetAddress": "Manchester Sharston"
+        },
+        "type": "object"
+      },
+      "location": {
+        "value": { "coordinates": [-2.239218, 53.371307], "type": "Point" },
+        "type": "geo:json"
+      },
+      "O3": {
+        "value": "22.35184",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NOXasNO2": {
+        "value": "65.59875",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO2": {
+        "value": "37.67625",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO": {
+        "value": "18.21058",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "name": {
+        "value": "Manchester Sharston Air Quality DEFRA",
+        "type": "Text"
+      }
+    }
+  ]
+}

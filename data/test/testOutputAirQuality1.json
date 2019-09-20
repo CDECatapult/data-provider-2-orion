@@ -1,0 +1,97 @@
+{
+  "actionType": "APPEND",
+  "entities": [
+    {
+      "id": "urn:ngsiv2:AirQualityObserved:manchester:Piccadilly",
+      "type": "AirQualityObserved",
+      "address": {
+        "value": {
+          "addressCountry": "UK",
+          "addressLocality": "Manchester",
+          "streetAddress": "Manchester Piccadilly"
+        },
+        "type": "object"
+      },
+      "location": {
+        "value": { "coordinates": [-2.237881, 53.48152], "type": "Point" },
+        "type": "geo:json"
+      },
+      "PM25": {
+        "value": "10.8",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "SO2": {
+        "value": "1.66306",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "O3": {
+        "value": "10.37764",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NOXasNO2": {
+        "value": "112.455",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO2": {
+        "value": "54.6975",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "NO": {
+        "value": "37.66846",
+        "metadata": {
+          "unitCode": {
+            "value": "GQ"
+          },
+          "timestamp": {
+            "value": "2019-09-18T10:00:00.000Z",
+            "type": "DateTime"
+          }
+        }
+      },
+      "name": {
+        "value": "Manchester Piccadilly Air Quality DEFRA",
+        "type": "Text"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 function transform(data) {
   console.log("IN TRANSFORM AIR QUALITY");
-  var idString = data.title
+  var idString = data.locname
     .toString()
     .replace(/[\\"'()]/g, "")
     .replace("&", "")
@@ -50,32 +50,36 @@ function transform(data) {
         measurand = "SO2";
         break;
       case '"Nitrogen dioxide in air"':
-        measurand = NO2;
+        measurand = "NO2";
         break;
       case '"Ozone in air"':
         measurand = "O3";
         break;
       case '"Nitrogen oxides in air"':
-        measurand = "NO";
+        measurand = "NOXasNO2";
+        break;
+      case '"Particulate matter under 2.5 micro m (aerosol)"':
+        measurand = "PM25";
         break;
       default:
         measurand = "NotCurrentlySupported";
     }
 
     var timestamp = new Date(stream.current_time).toISOString();
-
-    transformed[measurand] = {
-      value: value,
-      metadata: {
-        unitCode: {
-          value: unitCode
-        },
-        timestamp: {
-          value: timestamp,
-          type: "DateTime"
+    if (measurand != "NotCurrentlySupported") {
+      transformed[measurand] = {
+        value: value,
+        metadata: {
+          unitCode: {
+            value: unitCode
+          },
+          timestamp: {
+            value: timestamp,
+            type: "DateTime"
+          }
         }
-      }
-    };
+      };
+    }
   }
   return transformed;
 }

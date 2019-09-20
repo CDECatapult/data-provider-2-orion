@@ -1,0 +1,53 @@
+{
+  "id": "cd10ca44-3609-476d-ad5a-d71270f1bf5e",
+  "creator": "euit001",
+  "updated": "Tue, 23 Jul 2019 14:45:09 GMT",
+  "title": "Manchester Sharston Air Quality (DEFRA)",
+  "url": "/feeds/cd10ca44-3609-476d-ad5a-d71270f1bf5e",
+  "private": "false",
+  "description": "Air quality data from Manchester Sharston station (DEFRA)",
+  "tags": ["\"Air quality\""],
+  "locname": "Manchester Sharston",
+  "lon": -2.23921800000000015274,
+  "lat": 5.3371307000000001608e1,
+  "ele": 3.8e1,
+  "website": "https://uk-air.defra.gov.uk/data/about_sos",
+  "streams": [
+    {
+      "id": 38,
+      "tags": ["\"Nitrogen monoxide in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "18.21058",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 7,
+      "tags": ["\"Ozone in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "22.35184",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 9,
+      "tags": ["\"Nitrogen oxides in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "65.59875",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    },
+    {
+      "id": 8,
+      "tags": ["\"Nitrogen dioxide in air\""],
+      "current_time": "Wed, 18 Sep 2019 10:00:00 GMT",
+      "current_value": "37.67625",
+      "unit_symbol": "μg/m3",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "micrograms per cubic metre"
+    }
+  ]
+}
