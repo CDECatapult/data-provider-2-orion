@@ -1,4 +1,4 @@
-function transform(data) {
+function transform(data, city) {
   var idString = data.locname
     .toString()
     .replace(/[\\"'()]/g, "")
@@ -11,26 +11,25 @@ function transform(data) {
   var id = idArray[0];
 
   let transformed = {
-    id: "urn:ngsiv2:WeatherObserved:manchester:" + id,
+    id: "urn:ngsiv2:WeatherObserved:" + city + ":" + id,
     type: "WeatherObserved",
     address: {
-      value: {
-        addressCountry: "UK",
-        addressLocality: "Manchester",
-        streetAddress: data.locname
-          .toString()
-          .replace(/[\\"'()]/g, "")
-          .replace("&", "")
-          .replace("/", "")
-          .replace("+", "")
-          .replace(".", "")
-          .replace(";", "")
-      },
-      type: "object"
+      addressCountry: "UK",
+      addressLocality: city,
+      streetAddress: data.locname
+        .toString()
+        .replace(/[\\"'()]/g, "")
+        .replace("&", "")
+        .replace("/", "")
+        .replace("+", "")
+        .replace(".", "")
+        .replace(";", "")
     },
-    name: {
-      value: data.title.toString().replace(/[\\"'()]/g, ""),
-      type: "Text"
+    name: data.title.toString().replace(/[\\"'()]/g, ""),
+    dateObserved: new Date(data.streams[0].current_time).toISOString(),
+    location: {
+      coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
+      type: "Point"
     }
   };
   for (let stream of data.streams) {
@@ -57,6 +56,7 @@ function transform(data) {
         } else {
           visibilityClassification = "good";
         }
+        value = visibilityClassification;
         attribute = "visibility";
         break;
       case "pressure":
@@ -70,23 +70,23 @@ function transform(data) {
             value = "rising";
           }
         } else {
-          value = stream.current_value;
+          value = parseFloat(stream.current_value);
           attribute = "atmosphericPressure";
         }
         measurand = "SO2";
         break;
       case "dewpoint":
         attribute = "dewPoint";
-        value = stream.current_value;
+        value = parseFloat(stream.current_value);
         break;
       case "humidity":
         attribute = "humidity";
-        value = stream.current_value;
+        value = parseFloat(stream.current_value);
         break;
       case "wind":
         if (stream.tags.length < 3 && stream.tags[1] == "speed") {
           attribute = "windSpeed";
-          value = stream.current_value;
+          value = parseFloat(stream.current_value);
         } else if (stream.tags.length < 3 && stream.tags[1] == "direction") {
           attribute = "windDirection";
           windCompassMap = {
@@ -112,23 +112,14 @@ function transform(data) {
         break;
       case "temperature":
         attribute = "temperature";
-        value = stream.current_value;
+        value = parseFloat(stream.current_value);
         break;
       default:
         attribute = "NotCurrentlySupported";
     }
 
-    var timestamp = new Date(stream.current_time).toISOString();
     if (attribute != "NotCurrentlySupported" && attribute != "") {
-      transformed[attribute] = {
-        value: value,
-        metadata: {
-          timestamp: {
-            value: timestamp,
-            type: "DateTime"
-          }
-        }
-      };
+      transformed[attribute] = value;
     }
   }
   return transformed;

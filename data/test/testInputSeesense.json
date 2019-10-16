@@ -1,0 +1,41 @@
+{
+  "id": "5bc39ae3-0477-4f47-9be2-150b128ee6c3",
+  "creator": "seesense",
+  "updated": "Thu, 22 Aug 2019 22:04:54 GMT",
+  "title": "SeeSense Virtual Cycle Counter - Manchester Chapel St 1",
+  "url": "/feeds/5bc39ae3-0477-4f47-9be2-150b128ee6c3",
+  "private": "true",
+  "description": "Cycle count data generated via SeeSense ACE lights. Part of the Synchronicity project.",
+  "tags": ["\"cycle count\"", "\"cycle speed\"", "\"road quality\""],
+  "locname": " Manchester Chapel St",
+  "lon": -2.28670099999999987261,
+  "lat": 5.34917429999999995971e1,
+  "ele": 0.0,
+  "website": "https://seesense.cc/pages/ride-insights",
+  "streams": [
+    {
+      "id": 3,
+      "tags": ["\"road quality index\""],
+      "current_time": "Fri, 13 Sep 2019 20:11:50 GMT",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "road quality index"
+    },
+    {
+      "id": 2,
+      "tags": ["speed"],
+      "current_time": "Fri, 13 Sep 2019 20:11:50 GMT",
+      "current_value": "52.6",
+      "unit_symbol": "km/h",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "average speed"
+    },
+    {
+      "id": 1,
+      "tags": ["\"cycle count\""],
+      "current_value": "197",
+      "current_time": "Fri, 13 Sep 2019 20:11:50 GMT",
+      "unit_type": "contextDependentUnits",
+      "unit_text": "number of cyclists"
+    }
+  ]
+}

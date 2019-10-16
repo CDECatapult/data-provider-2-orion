@@ -1,0 +1,24 @@
+{
+  "actionType": "APPEND",
+  "entities": [
+    {
+      "id": "urn:ngsiv2:TrafficFlowObserved:manchester:ManchesterChapelSt",
+      "type": "TrafficFlowObserved",
+      "dateObserved": "2019-09-13T20:11:50.000Z",
+      "name": "SeeSense Virtual Cycle Counter - Manchester Chapel St 1",
+      "address": {
+        "addressCountry": "UK",
+        "addressLocality": "manchester",
+        "streetAddress": " Manchester Chapel St"
+      },
+      "location": {
+        "coordinates": [-2.286701, 53.491743],
+        "type": "Point"
+      },
+      "intensity": 197,
+      "laneId": 1,
+      "averageVehicleSpeed": 52.6,
+      "vehicleType": "bicycle"
+    }
+  ]
+}

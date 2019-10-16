@@ -4,44 +4,22 @@
     {
       "id": "urn:ngsiv2:BikeHireDockingStation:dublin:Smithfield",
       "type": "BikeHireDockingStation",
-      "status": {
-        "value": "CLOSED"
-      },
+      "name": "Dublinbikes Cycle Share Scheme Station SMITHFIELD 35",
+
+      "status": "CLOSED",
+      "dateObserved": "2019-07-05T09:34:40.000Z",
       "address": {
-        "value": {
-          "addressCountry": "UK",
-          "addressLocality": "Manchester",
-          "streetAddress": "Smithfield"
-        },
-        "type": "object"
+        "addressCountry": "UK",
+        "addressLocality": "dublin",
+        "streetAddress": "Smithfield"
       },
-      "availableBikeNumber": {
-        "value": 0,
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-07-05T09:34:40.000Z"
-          }
-        }
+      "location": {
+        "coordinates": [-6.278214, 53.34769],
+        "type": "Point"
       },
-      "freeSlotNumber": {
-        "value": 0,
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-07-05T09:34:40.000Z"
-          }
-        }
-      },
-      "totalSlotNumber": {
-        "value": 30,
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-07-05T09:34:40.000Z"
-          }
-        }
-      }
+      "availableBikeNumber": 0,
+      "freeSlotNumber": 0,
+      "totalSlotNumber": 30
     }
   ]
 }

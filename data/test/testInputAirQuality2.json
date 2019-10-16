@@ -8,8 +8,8 @@
   "description": "Air quality data from Manchester Sharston station (DEFRA)",
   "tags": ["\"Air quality\""],
   "locname": "Manchester Sharston",
-  "lon": -2.23921800000000015274,
-  "lat": 5.3371307000000001608e1,
+  "lon": -2.23788099999999978706,
+  "lat": 5.34815200000000032787e1,
   "ele": 3.8e1,
   "website": "https://uk-air.defra.gov.uk/data/about_sos",
   "streams": [

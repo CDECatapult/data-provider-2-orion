@@ -1,4 +1,4 @@
-function transform(data) {
+function transform(data, city) {
   var idString = data.locname
     .toString()
     .replace(/[\\"'()]/g, "")
@@ -44,45 +44,25 @@ function transform(data) {
     }
   }
   let transformed = {
-    id: `urn:ngsiv2:${type}:dublin:${id}`,
+    id: `urn:ngsiv2:${type}:${city}:${id}`,
     type: type,
-    status: {
-      value: status
-    },
+    status: status,
     address: {
-      value: {
-        addressCountry: "UK",
-        addressLocality: "Manchester",
-        streetAddress: streetAddress
-      },
-      type: "object"
+      addressCountry: "UK",
+      addressLocality: city,
+      streetAddress: streetAddress
     },
-    availableBikeNumber: {
-      value: availableBikeNumber,
-      metadata: {
-        timestamp: {
-          type: "DateTime",
-          value: timestampABN
-        }
-      }
-    },
-    freeSlotNumber: {
-      value: freeSlotNumber,
-      metadata: {
-        timestamp: {
-          type: "DateTime",
-          value: timestampFSN
-        }
-      }
-    },
-    totalSlotNumber: {
-      value: totalSlotNumber,
-      metadata: {
-        timestamp: {
-          type: "DateTime",
-          value: timestampTSN
-        }
-      }
+    name: data.title.toString().replace(/[\\"'()]/g, ""),
+    dateObserved: timestampABN,
+    availableBikeNumber: availableBikeNumber,
+
+    freeSlotNumber: freeSlotNumber,
+
+    totalSlotNumber: totalSlotNumber,
+
+    location: {
+      coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
+      type: "Point"
     }
   };
   return transformed;

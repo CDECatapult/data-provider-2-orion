@@ -4,59 +4,28 @@
     {
       "id": "urn:ngsiv2:OnStreetParking:manchester:StockportExchangeSurface",
       "type": "OnStreetParking",
+      "dateObserved": "2019-06-14T16:15:11.000Z",
       "address": {
-        "value": {
-          "addressCountry": "UK",
-          "addressLocality": "Manchester",
-          "streetAddress": "Stockport Exchange Surface"
-        },
-        "type": "object"
+        "addressCountry": "UK",
+        "addressLocality": "manchester",
+        "streetAddress": "Stockport Exchange Surface"
       },
-      "allowedVehicleType": {
-        "value": ["car"],
-        "type": "Text"
+      "allowedVehicleType": ["car"],
+
+      "location": {
+        "coordinates": [-2.161386, 53.40526],
+        "type": "Point"
       },
-      "availableSpotNumber": {
-        "value": 927,
-        "type": "Number",
-        "metadata": {
-          "timestamp": {
-            "value": "2019-06-14T16:15:11.000Z",
-            "type": "DateTime"
-          }
-        }
-      },
-      "category": {
-        "value": ["public"],
-        "type": "Text"
-      },
-      "chargeType": {
-        "value": ["free"],
-        "type": "Text"
-      },
-      "name": {
-        "value": "Manchester Parking Data - Stockport Exchange Surface",
-        "type": "Text"
-      },
-      "occupancyDetectionType": {
-        "value": ["none"],
-        "type": "Text"
-      },
+      "availableSpotNumber": 927,
+      "category": ["public"],
+      "chargeType": ["free"],
+
+      "name": "Manchester Parking Data - Stockport Exchange Surface",
+
+      "occupancyDetectionType": ["none"],
       "permitActiveHours": {},
-      "requiredPermit": {
-        "value": ["noPermitNeeded"],
-        "type": "Text"
-      },
-      "totalSpotNumber": {
-        "value": 1000,
-        "type": "Number",
-        "metadata": {
-          "timestamp": {
-            "type": "DateTime",
-            "value": "2019-06-14T16:15:11.000Z"
-          }
-        }
-      }
+      "requiredPermit": ["noPermitNeeded"],
+      "totalSpotNumber": 1000
     }
   ]
 }

@@ -4,8 +4,10 @@ const parkingIDs = require("../data/parkingFeedIDs.json");
 const bicycleIDs = require("../data/bicycleShareFeedIDs.json");
 const weatherObservedIDs = require("../data/weatherObservedFeedIDs.json");
 const weatherForecastIDs = require("../data/weatherForecastFeedIDs.json");
+const seesenseIDs = require("../data/seeSenseFeedIDs.json");
 const airQualityIDs = require("../data/airQualityFeedIDs.json");
 const transformParking = require("./transformParking");
+const transformSeesense = require("./transformSeesense");
 const transformBicycleShare = require("./transformBicycleShare");
 const transformWeatherObserved = require("./transformWeatherObserved");
 const transformWeatherForecast = require("./transformWeatherForecast");
@@ -76,7 +78,35 @@ for (let airQualityID of airQualityIDs) {
     fiwareService: "manchester"
   });
 }
+let dublinSeesenseIDs = seesenseIDs.dublin;
 
+for (let dublinSeesenseID of dublinSeesenseIDs) {
+  dataFeedsTransformMap.push({
+    id: dublinSeesenseID,
+    transform: transformSeesense,
+    fiwareService: "dublin"
+  });
+}
+
+let manchesterSeesenseIDs = seesenseIDs.manchester;
+
+for (let manchesterSeesenseID of manchesterSeesenseIDs) {
+  dataFeedsTransformMap.push({
+    id: manchesterSeesenseID,
+    transform: transformSeesense,
+    fiwareService: "manchester"
+  });
+}
+
+let antwerpSeesenseIDs = seesenseIDs.antwerp;
+
+for (let antwerpSeesenseID of antwerpSeesenseIDs) {
+  dataFeedsTransformMap.push({
+    id: antwerpSeesenseID,
+    transform: transformSeesense,
+    fiwareService: "antwerp"
+  });
+}
 exports.handler = async event => {
   const { published, errors } = await getAndPublishAll(
     bt,
@@ -91,6 +121,6 @@ exports.handler = async event => {
     statusCode: 200,
     body: `Published: ${published}, errors: ${errors}`
   };
-
+  console.log(response);
   return response;
 };

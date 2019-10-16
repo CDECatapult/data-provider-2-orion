@@ -1,4 +1,4 @@
-function transform(data) {
+function transform(data, city) {
   console.log("IN TRANSFORM AIR QUALITY");
   var idString = data.locname
     .toString()
@@ -10,29 +10,28 @@ function transform(data) {
     .replace(";", "");
   var idArray = idString.split(" ");
   var id = idArray[idArray.length - 1];
-
+  var timestamp = new Date(data.streams[0].current_time).toISOString();
   let transformed = {
-    id: "urn:ngsiv2:AirQualityObserved:manchester:" + id,
+    id: "urn:ngsiv2:AirQualityObserved:" + city + ":" + id,
     type: "AirQualityObserved",
     address: {
-      value: {
-        addressCountry: "UK",
-        addressLocality: "Manchester",
-        streetAddress: data.locname
-          .toString()
-          .replace(/[\\"'()]/g, "")
-          .replace(/[\\"'()]/g, "")
-          .replace("&", "")
-          .replace("/", "")
-          .replace("+", "")
-          .replace(".", "")
-          .replace(";", "")
-      },
-      type: "object"
+      addressCountry: "UK",
+      addressLocality: city,
+      streetAddress: data.locname
+        .toString()
+        .replace(/[\\"'()]/g, "")
+        .replace(/[\\"'()]/g, "")
+        .replace("&", "")
+        .replace("/", "")
+        .replace("+", "")
+        .replace(".", "")
+        .replace(";", "")
     },
-    name: {
-      value: data.title.toString().replace(/[\\"'()]/g, ""),
-      type: "Text"
+    name: data.title.toString().replace(/[\\"'()]/g, ""),
+    dateObserved: timestamp,
+    location: {
+      coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
+      type: "Point"
     }
   };
   for (let stream of data.streams) {
@@ -67,20 +66,8 @@ function transform(data) {
         measurand = "NotCurrentlySupported";
     }
 
-    var timestamp = new Date(stream.current_time).toISOString();
     if (measurand != "NotCurrentlySupported") {
-      transformed[measurand] = {
-        value: value,
-        metadata: {
-          unitCode: {
-            value: unitCode
-          },
-          timestamp: {
-            value: timestamp,
-            type: "DateTime"
-          }
-        }
-      };
+      transformed[measurand] = parseFloat(value);
     }
   }
   return transformed;

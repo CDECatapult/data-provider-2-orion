@@ -15,7 +15,7 @@ async function publishToBroker(data, dataBroker, oauth2, fiwareService = null) {
     headers["Fiware-Path"] = "/";
   }
 
-  const resp = await dataBroker.post("/v2/op/update", {
+  const resp = await dataBroker.post("/v2/op/update?options=keyValues", {
     body: { actionType: "APPEND", entities: [data] },
     headers
   });
@@ -37,7 +37,7 @@ async function getAndPublishOne(
 ) {
   const data = await getDataFromProvider(feedID, dataProvider);
 
-  const transformedData = transform(data);
+  const transformedData = transform(data, fiwareService);
 
   await publishToBroker(transformedData, dataBroker, oauth2, fiwareService);
 }

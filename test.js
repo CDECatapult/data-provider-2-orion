@@ -8,6 +8,11 @@ const bicycleShareFeedIDs = ["feed4", "feed5", "feed6"];
 const weatherObservedFeedIDs = ["feed7", "feed8", "feed9"];
 const weatherForecastFeedIDs = ["feed10", "feed11", "feed12"];
 const airQualityFeedIDs = ["feed13", "feed14"];
+const seesenseFeedIDs = {
+  manchester: ["feed14", "feed15"],
+  dublin: [],
+  antwerp: []
+};
 const env = {
   BT_DATAHUB_API_KEY: "testkey",
   BT_DATAHUB_URL: "http://bt",
@@ -30,6 +35,8 @@ const airQualityInput1 = require("./data/test/testInputAirQuality1.json");
 const airQualityOutput1 = require("./data/test/testOutputAirQuality1.json");
 const airQualityInput2 = require("./data/test/testInputAirQuality2.json");
 const airQualityOutput2 = require("./data/test/testOutputAirQuality2.json");
+const seeSenseInput = require("./data/test/testInputSeesense.json");
+const seeSenseOutput = require("./data/test/testOutputSeesense.json");
 
 test.afterEach.always(() => {
   nock.cleanAll();
@@ -44,6 +51,11 @@ test.serial("Get all data points for Parking data from BT", async t => {
   mock("./data/weatherObservedFeedIDs.json", []);
   mock("./data/weatherForecastFeedIDs.json", []);
   mock("./data/airQualityFeedIDs.json", []);
+  mock("./data/seeSenseFeedIDs.json", {
+    manchester: [],
+    dublin: [],
+    antwerp: []
+  });
   mock("./src/env", env);
 
   const { handler } = mock.reRequire("./src");
@@ -82,7 +94,7 @@ test.serial("Get all data points for Parking data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update", body => {
+    .post("/v2/op/update?options=keyValues", body => {
       t.deepEqual(body, parkingOutput);
       return true;
     })
@@ -102,6 +114,11 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
   mock("./data/weatherObservedFeedIDs.json", []);
   mock("./data/weatherForecastFeedIDs.json", []);
   mock("./data/airQualityFeedIDs.json", []);
+  mock("./data/seeSenseFeedIDs.json", {
+    manchester: [],
+    dublin: [],
+    antwerp: []
+  });
   mock("./src/env", env);
 
   const { handler } = mock.reRequire("./src");
@@ -140,7 +157,7 @@ test.serial("Get all data points for Bicycle Share data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update", body => {
+    .post("/v2/op/update?options=keyValues", body => {
       t.deepEqual(body, bicycleOutput);
       return true;
     })
@@ -161,6 +178,11 @@ test.serial(
     mock("./data/weatherObservedFeedIDs.json", weatherObservedFeedIDs);
     mock("./data/weatherForecastFeedIDs.json", []);
     mock("./data/airQualityFeedIDs.json", []);
+    mock("./data/seeSenseFeedIDs.json", {
+      manchester: [],
+      dublin: [],
+      antwerp: []
+    });
     mock("./src/env", env);
 
     const { handler } = mock.reRequire("./src");
@@ -199,7 +221,7 @@ test.serial(
         "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
       }
     })
-      .post("/v2/op/update", body => {
+      .post("/v2/op/update?options=keyValues", body => {
         t.deepEqual(body, weatherObservedOutput);
         return true;
       })
@@ -221,6 +243,11 @@ test.serial(
     mock("./data/weatherObservedFeedIDs.json", []);
     mock("./data/weatherForecastFeedIDs.json", weatherForecastFeedIDs);
     mock("./data/airQualityFeedIDs.json", []);
+    mock("./data/seeSenseFeedIDs.json", {
+      manchester: [],
+      dublin: [],
+      antwerp: []
+    });
     mock("./src/env", env);
 
     const { handler } = mock.reRequire("./src");
@@ -259,7 +286,7 @@ test.serial(
         "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
       }
     })
-      .post("/v2/op/update", body => {
+      .post("/v2/op/update?options=keyValues", body => {
         t.deepEqual(body, weatherForecastOutput);
         return true;
       })
@@ -279,6 +306,11 @@ test.serial("Get all data points for AirQuality data from BT", async t => {
   mock("./data/weatherObservedFeedIDs.json", []);
   mock("./data/weatherForecastFeedIDs.json", []);
   mock("./data/airQualityFeedIDs.json", airQualityFeedIDs);
+  mock("./data/seeSenseFeedIDs.json", {
+    manchester: [],
+    dublin: [],
+    antwerp: []
+  });
   mock("./src/env", env);
 
   const { handler } = mock.reRequire("./src");
@@ -316,7 +348,7 @@ test.serial("Get all data points for AirQuality data from BT", async t => {
       "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
     }
   })
-    .post("/v2/op/update", body => {
+    .post("/v2/op/update?options=keyValues", body => {
       let oneOrOther =
         equal(body, airQualityOutput1) || equal(body, airQualityOutput2);
       if (!oneOrOther) {
@@ -329,6 +361,67 @@ test.serial("Get all data points for AirQuality data from BT", async t => {
       return true;
     })
     .times(airQualityFeedIDs.length)
+    .reply(201, {});
+
+  await handler();
+  t.is(btMock.isDone(), true);
+  t.is(orionMock.isDone(), true);
+  t.is(idmMock.isDone(), true);
+});
+
+test.serial("Get all data points for SeeSense data from BT", async t => {
+  mock("./data/parkingFeedIDs.json", []);
+  mock("./data/bicycleShareFeedIDs.json", []);
+  mock("./data/weatherObservedFeedIDs.json", []);
+  mock("./data/weatherForecastFeedIDs.json", []);
+  mock("./data/airQualityFeedIDs.json", []);
+  mock("./data/seeSenseFeedIDs.json", seesenseFeedIDs);
+  mock("./src/env", env);
+
+  const { handler } = mock.reRequire("./src");
+
+  let idmMock = nock(env.IDM_URL, {
+    reqheaders: {
+      authorization: "Basic jgfewiuhfoizjm",
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  })
+    .post(
+      "/oauth2/token",
+      "grant_type=password&username=a%40b.com&password=1234"
+    )
+    .reply(200, {
+      access_token: "512353818ded748f8d3c472c86e5ba6adccb8106",
+      token_type: "Bearer",
+      expires_in: 3599,
+      refresh_token: "3924b6dqwe01467972d5e3ff5105706bab00f3b9",
+      scope: ["bearer"]
+    });
+
+  let btMock = nock(env.BT_DATAHUB_URL, {
+    reqheaders: {
+      "x-api-key": "testkey"
+    }
+  });
+  btMock = btMock
+    .get(`/${seesenseFeedIDs.manchester[0]}`)
+    .reply(200, seeSenseInput);
+  btMock = btMock
+    .get(`/${seesenseFeedIDs.manchester[1]}`)
+    .reply(200, seeSenseInput);
+
+  let orionMock = nock(env.CONTEXT_BROKER_URL, {
+    reqheaders: {
+      "Fiware-Service": "manchester",
+      "Fiware-Path": "/",
+      "x-auth-token": "512353818ded748f8d3c472c86e5ba6adccb8106"
+    }
+  })
+    .post("/v2/op/update?options=keyValues", body => {
+      t.deepEqual(body, seeSenseOutput);
+      return true;
+    })
+    .times(seesenseFeedIDs.manchester.length)
     .reply(201, {});
 
   await handler();

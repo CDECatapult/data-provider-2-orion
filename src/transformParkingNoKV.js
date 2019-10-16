@@ -46,29 +46,60 @@ function transform(data, city) {
     id: `urn:ngsiv2:${type}:${city}:${id}`,
     type: type,
     address: {
-      addressCountry: "UK",
-      addressLocality: city,
-      streetAddress: streetAddress
+      value: {
+        addressCountry: "UK",
+        addressLocality: city,
+        streetAddress: streetAddress
+      },
+      type: "object"
     },
     name: data.title.toString().replace(/[\\"'()]/g, ""),
-    dateObserved: new Date(data.streams[0].current_time).toISOString(),
-    category: ["public"],
 
-    allowedVehicleType: ["car"],
-
-    requiredPermit: ["noPermitNeeded"],
-
-    chargeType: ["free"],
-
-    occupancyDetectionType: ["none"],
-
-    availableSpotNumber: parseInt(data.streams[0].current_value),
-
-    totalSpotNumber: parseInt(data.streams[1].current_value),
-
+    category: {
+      value: ["public"],
+      type: "Text"
+    },
+    allowedVehicleType: {
+      value: ["car"],
+      type: "Text"
+    },
+    requiredPermit: {
+      value: ["noPermitNeeded"],
+      type: "Text"
+    },
+    chargeType: {
+      value: ["free"],
+      type: "Text"
+    },
+    occupancyDetectionType: {
+      value: ["none"],
+      type: "Text"
+    },
+    availableSpotNumber: {
+      value: parseInt(data.streams[0].current_value),
+      type: "Number",
+      metadata: {
+        timestamp: {
+          value: new Date(data.streams[0].current_time).toISOString(),
+          type: "DateTime"
+        }
+      }
+    },
+    totalSpotNumber: {
+      value: parseInt(data.streams[1].current_value),
+      type: "Number",
+      metadata: {
+        timestamp: {
+          type: "DateTime",
+          value: new Date(data.streams[1].current_time).toISOString()
+        }
+      }
+    },
     location: {
-      coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
-      type: "Point"
+      value: {
+        coordinates: [parseFloat(data.lon), parseFloat(data.lat)],
+        type: "Point"
+      }
     }
   };
   if (type == "OnStreetParking") {
